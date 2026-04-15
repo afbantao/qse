@@ -6,236 +6,148 @@
   <title>Questionário — Simulação Empresarial 2025/2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { font-size: 16px; -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #0f172a;
-      color: #e2e8f0;
+      background: #fff;
+      color: #111;
       line-height: 1.6;
       min-height: 100vh;
-      overflow-x: hidden;
     }
 
-    /* ── Background ── */
-    .bg-glow {
-      position: fixed;
-      top: -40%;
-      left: -20%;
-      width: 80vw;
-      height: 80vw;
-      background: radial-gradient(circle, rgba(59,130,246,.12) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .bg-glow-2 {
-      position: fixed;
-      bottom: -30%;
-      right: -20%;
-      width: 60vw;
-      height: 60vw;
-      background: radial-gradient(circle, rgba(139,92,246,.08) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ── Layout ── */
     .app {
-      position: relative;
-      z-index: 1;
-      max-width: 640px;
+      max-width: 600px;
       margin: 0 auto;
-      padding: 24px 16px 80px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      padding: 48px 24px 80px;
     }
 
     /* ── Progress ── */
-    .progress-wrap {
-      margin-bottom: 32px;
-    }
+    .progress-wrap { margin-bottom: 40px; }
 
     .progress-header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .progress-label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #64748b;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #999;
       text-transform: uppercase;
       letter-spacing: 0.08em;
     }
 
     .progress-count {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #3b82f6;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #999;
     }
 
     .progress-track {
       width: 100%;
-      height: 4px;
-      background: #1e293b;
-      border-radius: 99px;
-      overflow: hidden;
+      height: 2px;
+      background: #eee;
+      border-radius: 1px;
     }
 
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-      border-radius: 99px;
-      transition: width 0.5s cubic-bezier(.4,0,.2,1);
+      background: #111;
+      border-radius: 1px;
+      transition: width 0.4s ease;
       width: 0%;
-    }
-
-    /* ── Steps dots ── */
-    .steps-dots {
-      display: flex;
-      gap: 6px;
-      margin-top: 12px;
-    }
-
-    .step-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #1e293b;
-      transition: background 0.3s, transform 0.3s;
-    }
-
-    .step-dot.done {
-      background: #3b82f6;
-    }
-
-    .step-dot.active {
-      background: #8b5cf6;
-      transform: scale(1.3);
-    }
-
-    /* ── Card ── */
-    .card {
-      background: rgba(30, 41, 59, 0.6);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(148, 163, 184, 0.08);
-      border-radius: 20px;
-      padding: 36px 32px;
-      flex: 1;
     }
 
     /* ── Step panels ── */
     .step {
       display: none;
-      animation: fadeSlideIn 0.4s ease forwards;
+      animation: fadeIn 0.3s ease;
     }
 
-    .step.active {
-      display: block;
-    }
+    .step.active { display: block; }
 
-    @keyframes fadeSlideIn {
-      from { opacity: 0; transform: translateY(16px); }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     /* ── Typography ── */
     .step-tag {
-      display: inline-block;
       font-size: 0.7rem;
-      font-weight: 700;
+      font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: #8b5cf6;
-      background: rgba(139,92,246,.12);
-      padding: 4px 12px;
-      border-radius: 99px;
-      margin-bottom: 16px;
+      letter-spacing: 0.08em;
+      color: #999;
+      margin-bottom: 12px;
+      display: block;
     }
 
     h1 {
-      font-size: 1.75rem;
-      font-weight: 800;
-      line-height: 1.25;
-      color: #f1f5f9;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: #111;
       margin-bottom: 16px;
-      letter-spacing: -0.02em;
     }
 
     h2 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      line-height: 1.3;
-      color: #f1f5f9;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #111;
       margin-bottom: 8px;
-      letter-spacing: -0.01em;
     }
 
     .intro-text {
       font-size: 0.88rem;
-      color: #94a3b8;
+      color: #555;
       line-height: 1.75;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .required-note {
       font-size: 0.78rem;
-      color: #f87171;
+      color: #c00;
       margin-top: 12px;
-      font-weight: 500;
+      font-weight: 400;
     }
 
-    /* ── Form Fields ── */
-    .field {
-      margin-bottom: 24px;
+    /* ── Separator ── */
+    .sep {
+      border: none;
+      border-top: 1px solid #eee;
+      margin: 32px 0;
     }
 
-    .field:last-child {
-      margin-bottom: 0;
-    }
+    /* ── Fields ── */
+    .field { margin-bottom: 28px; }
+    .field:last-of-type { margin-bottom: 0; }
 
     .field-label {
       display: block;
       font-size: 0.88rem;
       font-weight: 500;
-      color: #cbd5e1;
+      color: #111;
       margin-bottom: 8px;
       line-height: 1.55;
     }
 
     .field-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: rgba(59,130,246,.15);
-      color: #60a5fa;
-      font-size: 0.72rem;
-      font-weight: 700;
-      margin-right: 8px;
-      flex-shrink: 0;
-      vertical-align: middle;
+      font-weight: 400;
+      color: #999;
+      margin-right: 4px;
     }
 
-    .required-star {
-      color: #f87171;
-      margin-left: 2px;
-    }
+    .required-star { color: #c00; }
 
     .field-hint {
       font-size: 0.8rem;
-      color: #64748b;
-      margin-bottom: 8px;
+      color: #888;
+      margin-bottom: 10px;
       line-height: 1.5;
     }
 
@@ -243,122 +155,106 @@
     textarea {
       width: 100%;
       font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
-      color: #f1f5f9;
-      background: rgba(15, 23, 42, 0.5);
-      border: 1.5px solid rgba(148,163,184,.15);
-      border-radius: 12px;
-      padding: 14px 16px;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      font-size: 0.88rem;
+      color: #111;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 12px 14px;
+      transition: border-color 0.15s;
       outline: none;
     }
 
     input[type="email"]::placeholder,
-    textarea::placeholder {
-      color: #475569;
-    }
+    textarea::placeholder { color: #bbb; }
 
     input[type="email"]:focus,
-    textarea:focus {
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 3px rgba(59,130,246,.15);
-    }
+    textarea:focus { border-color: #111; }
 
     input[type="email"].error,
-    textarea.error {
-      border-color: #ef4444;
-      box-shadow: 0 0 0 3px rgba(239,68,68,.12);
-    }
+    textarea.error { border-color: #c00; }
 
     textarea {
-      min-height: 110px;
+      min-height: 100px;
       resize: vertical;
     }
 
     .error-msg {
       font-size: 0.78rem;
-      color: #f87171;
+      color: #c00;
       margin-top: 6px;
       display: none;
-      font-weight: 500;
     }
 
-    .error-msg.visible {
-      display: block;
-    }
+    .error-msg.visible { display: block; }
 
     /* ── Scale Legend ── */
     .scale-legend {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px 16px;
-      font-size: 0.78rem;
-      color: #94a3b8;
+      gap: 4px 18px;
+      font-size: 0.75rem;
+      color: #888;
       margin-bottom: 24px;
-      padding: 14px 16px;
-      background: rgba(15,23,42,.4);
-      border-radius: 12px;
-      border: 1px solid rgba(148,163,184,.08);
     }
 
-    .scale-legend span { white-space: nowrap; }
-    .scale-legend strong { color: #e2e8f0; font-weight: 600; }
+    .scale-legend strong {
+      color: #555;
+      font-weight: 600;
+    }
 
     /* ── Radio Matrix ── */
-    .matrix-group {
-      margin-bottom: 28px;
+    .matrix-col-headers {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      padding: 0 0 10px 0;
+      border-bottom: 1px solid #eee;
     }
 
-    .matrix-group:last-child {
-      margin-bottom: 0;
-    }
+    .matrix-col-headers .spacer { flex: 1; }
 
-    .matrix-label {
-      font-size: 0.92rem;
+    .matrix-col-headers .col-label {
+      width: 40px;
+      text-align: center;
+      font-size: 0.7rem;
       font-weight: 600;
-      color: #e2e8f0;
-      margin-bottom: 16px;
-      line-height: 1.4;
+      color: #999;
     }
 
     .matrix-row {
       display: flex;
       align-items: center;
-      gap: 8px;
       padding: 14px 0;
-      border-bottom: 1px solid rgba(148,163,184,.06);
+      border-bottom: 1px solid #f5f5f5;
     }
 
-    .matrix-row:last-child {
-      border-bottom: none;
-    }
+    .matrix-row:last-child { border-bottom: none; }
 
     .matrix-row-label {
       flex: 1;
       font-size: 0.84rem;
-      color: #94a3b8;
+      color: #444;
       line-height: 1.4;
-      min-width: 0;
+      padding-right: 8px;
     }
 
-    .matrix-row.has-error .matrix-row-label {
-      color: #f87171;
-    }
+    .matrix-row.has-error .matrix-row-label { color: #c00; }
 
     .matrix-radios {
       display: flex;
-      gap: 4px;
+      gap: 0;
       flex-shrink: 0;
     }
 
     .radio-btn {
-      position: relative;
       width: 40px;
       height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      position: relative;
     }
 
     .radio-btn input {
@@ -371,17 +267,16 @@
     }
 
     .radio-btn .dot {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
-      border: 2px solid rgba(148,163,184,.25);
-      transition: all 0.2s;
-      position: relative;
+      border: 1.5px solid #ccc;
+      transition: all 0.15s;
     }
 
     .radio-btn input:checked + .dot {
-      border-color: #3b82f6;
-      background: #3b82f6;
+      border-color: #111;
+      background: #111;
     }
 
     .radio-btn input:checked + .dot::after {
@@ -390,112 +285,72 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%,-50%);
-      width: 8px;
-      height: 8px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       background: #fff;
     }
 
-    .radio-btn:hover .dot {
-      border-color: #3b82f6;
-    }
-
-    .matrix-col-headers {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 0 0 8px 0;
-      border-bottom: 1px solid rgba(148,163,184,.1);
-      margin-bottom: 4px;
-    }
-
-    .matrix-col-headers .spacer {
-      flex: 1;
-    }
-
-    .matrix-col-headers .col-label {
-      width: 40px;
-      text-align: center;
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: #64748b;
-    }
+    .radio-btn:hover .dot { border-color: #888; }
 
     /* ── Navigation ── */
     .nav-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 32px;
-      gap: 12px;
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid #eee;
     }
 
     .btn {
       font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 600;
+      font-size: 0.85rem;
+      font-weight: 500;
       border: none;
-      border-radius: 12px;
-      padding: 14px 32px;
+      border-radius: 6px;
+      padding: 11px 28px;
       cursor: pointer;
-      transition: all 0.2s;
-      outline: none;
+      transition: opacity 0.15s;
     }
 
     .btn-next {
-      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      background: #111;
       color: #fff;
       margin-left: auto;
     }
 
-    .btn-next:hover {
-      box-shadow: 0 8px 24px rgba(59,130,246,.3);
-      transform: translateY(-1px);
-    }
-
-    .btn-next:active {
-      transform: translateY(0);
-    }
+    .btn-next:hover { opacity: 0.85; }
 
     .btn-back {
-      background: transparent;
-      color: #94a3b8;
-      padding: 14px 20px;
+      background: none;
+      color: #888;
+      padding: 11px 16px;
     }
 
-    .btn-back:hover {
-      color: #e2e8f0;
-    }
+    .btn-back:hover { color: #111; }
 
-    .btn:disabled {
-      opacity: .5;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-    }
+    .btn:disabled { opacity: 0.35; cursor: not-allowed; }
 
     .btn-submit {
-      background: linear-gradient(135deg, #10b981, #059669);
+      background: #111;
       color: #fff;
       margin-left: auto;
     }
 
-    .btn-submit:hover {
-      box-shadow: 0 8px 24px rgba(16,185,129,.3);
-      transform: translateY(-1px);
-    }
+    .btn-submit:hover { opacity: 0.85; }
 
     /* ── Spinner ── */
     .spinner {
       display: inline-block;
-      width: 18px;
-      height: 18px;
-      border: 2.5px solid rgba(255,255,255,.3);
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255,255,255,.3);
       border-top-color: #fff;
       border-radius: 50%;
-      animation: spin 0.6s linear infinite;
+      animation: spin 0.5s linear infinite;
       vertical-align: middle;
-      margin-right: 8px;
+      margin-right: 6px;
     }
 
     @keyframes spin { to { transform: rotate(360deg); } }
@@ -503,72 +358,52 @@
     /* ── Error Banner ── */
     .error-banner {
       display: none;
-      background: rgba(239,68,68,.1);
-      border: 1px solid rgba(239,68,68,.2);
-      border-radius: 12px;
-      padding: 14px 18px;
-      margin-bottom: 20px;
-      font-size: 0.84rem;
-      color: #fca5a5;
+      font-size: 0.82rem;
+      color: #c00;
+      margin-bottom: 16px;
       line-height: 1.5;
     }
 
-    .error-banner.visible {
-      display: block;
-    }
+    .error-banner.visible { display: block; }
 
-    /* ── Success Screen ── */
+    /* ── Success ── */
     .success-screen {
       display: none;
       text-align: center;
-      padding: 60px 24px;
+      padding: 80px 24px;
     }
 
     .success-screen.visible {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      animation: fadeSlideIn 0.5s ease forwards;
-    }
-
-    .success-icon {
-      width: 80px;
-      height: 80px;
-      background: rgba(16,185,129,.12);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 24px;
-    }
-
-    .success-icon svg {
-      width: 40px;
-      height: 40px;
-      color: #10b981;
+      display: block;
+      animation: fadeIn 0.4s ease;
     }
 
     .success-screen h2 {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #f1f5f9;
-      margin-bottom: 10px;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 8px;
     }
 
     .success-screen p {
-      font-size: 0.9rem;
-      color: #94a3b8;
-      max-width: 400px;
+      font-size: 0.88rem;
+      color: #888;
+      max-width: 380px;
+      margin: 0 auto;
       line-height: 1.7;
     }
 
-    /* ── Mobile Matrix ── */
+    .check-mark {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 20px;
+      color: #111;
+    }
+
+    /* ── Mobile ── */
     @media (max-width: 580px) {
-      .app { padding: 16px 12px 64px; }
-      .card { padding: 28px 20px; border-radius: 16px; }
-      h1 { font-size: 1.4rem; }
-      h2 { font-size: 1.15rem; }
+      .app { padding: 32px 20px 64px; }
+      h1 { font-size: 1.3rem; }
 
       .matrix-col-headers { display: none; }
 
@@ -579,36 +414,33 @@
         padding: 16px 0;
       }
 
+      .matrix-row-label { padding-right: 0; }
+
       .matrix-radios {
         width: 100%;
         justify-content: space-between;
-        gap: 0;
       }
 
       .radio-btn {
         flex: 1;
         flex-direction: column;
-        gap: 4px;
         height: auto;
-        padding: 6px 0;
+        padding: 4px 0;
       }
 
       .radio-btn .scale-num {
         display: block;
         font-size: 0.65rem;
-        color: #64748b;
-        font-weight: 600;
+        color: #999;
         margin-top: 4px;
       }
 
-      .btn { padding: 14px 24px; }
       .btn-next, .btn-submit { width: 100%; text-align: center; }
-      .nav-bar { flex-wrap: wrap; }
+      .nav-bar { flex-wrap: wrap; gap: 8px; }
       .btn-back { width: 100%; text-align: center; order: 2; }
       .btn-next, .btn-submit { order: 1; }
     }
 
-    /* Scale numbers hidden on desktop */
     @media (min-width: 581px) {
       .radio-btn .scale-num { display: none; }
     }
@@ -616,12 +448,8 @@
 </head>
 <body>
 
-<div class="bg-glow"></div>
-<div class="bg-glow-2"></div>
-
 <div class="app" id="app">
 
-  <!-- ── Progress ── -->
   <div class="progress-wrap" id="progressWrap">
     <div class="progress-header">
       <span class="progress-label">Progresso</span>
@@ -630,472 +458,221 @@
     <div class="progress-track">
       <div class="progress-fill" id="progressFill"></div>
     </div>
-    <div class="steps-dots" id="stepsDots"></div>
   </div>
 
-  <!-- ── Card ── -->
-  <div class="card">
+  <div class="error-banner" id="errorBanner"></div>
 
-    <div class="error-banner" id="errorBanner"></div>
+  <!-- ═══ STEP 0 — Intro + Email ═══ -->
+  <div class="step active" data-step="0">
+    <span class="step-tag">Bem-vindo/a</span>
+    <h1>Questionário de Avaliação do Docente e da Unidade Curricular</h1>
+    <p class="intro-text"><strong>Simulação Empresarial 2025/2026</strong> · Licenciatura em Gestão</p>
+    <p class="intro-text">
+      O presente questionário, de caráter estritamente anónimo, visa recolher a sua apreciação sobre a unidade curricular de Simulação Empresarial e sobre o desempenho do docente responsável pela sua lecionação. A informação obtida através deste instrumento constitui um contributo para a análise da qualidade pedagógica e para a implementação de medidas de aperfeiçoamento do processo de ensino-aprendizagem.
+    </p>
+    <p class="intro-text">
+      As suas respostas serão tratadas com absoluta confidencialidade e utilizadas exclusivamente para fins de melhoria contínua da prática docente e da estruturação dos conteúdos programáticos. Solicitamos, por conseguinte, que responda com honestidade e sentido crítico a todas as questões apresentadas.
+    </p>
+    <p class="required-note" style="margin-bottom:28px;">* Indica uma pergunta obrigatória</p>
 
-    <!-- ═══ STEP 0 — Intro + Email ═══ -->
-    <div class="step active" data-step="0">
-      <span class="step-tag">Bem-vindo/a</span>
-      <h1>Questionário de Avaliação do Docente e da Unidade Curricular</h1>
-      <p class="intro-text">
-        <strong style="color:#cbd5e1;">Simulação Empresarial 2025/2026</strong> &nbsp;·&nbsp; Licenciatura em Gestão
-      </p>
-      <p class="intro-text">
-        O presente questionário, de caráter estritamente anónimo, visa recolher a sua apreciação sobre a unidade curricular de Simulação Empresarial e sobre o desempenho do docente responsável pela sua lecionação.
-      </p>
-      <p class="intro-text">
-        As suas respostas serão tratadas com absoluta confidencialidade e utilizadas exclusivamente para fins de melhoria contínua da prática docente e da estruturação dos conteúdos programáticos. Solicitamos, por conseguinte, que responda com honestidade e sentido crítico a todas as questões apresentadas.
-      </p>
-      <p class="required-note" style="margin-bottom:24px;">* Indica uma pergunta obrigatória</p>
+    <hr class="sep">
 
-      <div class="field">
-        <label class="field-label" for="email">
-          Endereço de e-mail <span class="required-star">*</span>
-        </label>
-        <p class="field-hint">
-          Este questionário é anónimo e individual. O e-mail é solicitado apenas para efeitos de validação de resposta e não será associado às suas respostas.
-        </p>
-        <input type="email" id="email" name="email" placeholder="12345@ipportalegre.pt" required autocomplete="email">
-        <p class="error-msg" id="email-error">Por favor, insira um endereço de e-mail válido.</p>
-      </div>
+    <div class="field">
+      <label class="field-label" for="email">Endereço de e-mail <span class="required-star">*</span></label>
+      <p class="field-hint">Este questionário é anónimo e individual. O e-mail é solicitado apenas para efeitos de validação de resposta e não será associado às suas respostas.</p>
+      <input type="email" id="email" name="email" placeholder="12345@ipportalegre.pt" required autocomplete="email">
+      <p class="error-msg" id="email-error">Por favor, insira um endereço de e-mail válido.</p>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 1 — Q1-Q3 ═══ -->
+  <div class="step" data-step="1">
+    <span class="step-tag">Avaliação do Docente</span>
+    <h2>Perceção geral e comunicação</h2>
+    <hr class="sep">
+
+    <div class="field">
+      <label class="field-label" for="q1"><span class="field-number">1.</span> Resuma numa única frase o docente enquanto professor desta unidade curricular. <span class="required-star">*</span></label>
+      <textarea id="q1" name="q1" required></textarea>
+      <p class="error-msg" id="q1-error">Esta resposta é obrigatória.</p>
     </div>
 
-    <!-- ═══ STEP 1 — Docente Q1-Q3 ═══ -->
-    <div class="step" data-step="1">
-      <span class="step-tag">Avaliação do Docente</span>
-      <h2>Perceção geral e comunicação</h2>
-
-      <div class="field">
-        <label class="field-label" for="q1">
-          <span class="field-number">1</span> Resuma numa única frase o docente enquanto professor desta unidade curricular. <span class="required-star">*</span>
-        </label>
-        <textarea id="q1" name="q1" required></textarea>
-        <p class="error-msg" id="q1-error">Esta resposta é obrigatória.</p>
-      </div>
-
-      <div class="field">
-        <label class="field-label" for="q2">
-          <span class="field-number">2</span> Descreva a capacidade do docente para explicar os conteúdos da unidade curricular. <span class="required-star">*</span>
-        </label>
-        <textarea id="q2" name="q2" required></textarea>
-        <p class="error-msg" id="q2-error">Esta resposta é obrigatória.</p>
-      </div>
-
-      <div class="field">
-        <label class="field-label" for="q3">
-          <span class="field-number">3</span> Como caracteriza o acompanhamento prestado pelo docente aos alunos ao longo do semestre? <span class="required-star">*</span>
-        </label>
-        <textarea id="q3" name="q3" required></textarea>
-        <p class="error-msg" id="q3-error">Esta resposta é obrigatória.</p>
-      </div>
+    <div class="field">
+      <label class="field-label" for="q2"><span class="field-number">2.</span> Descreva a capacidade do docente para explicar os conteúdos da unidade curricular. <span class="required-star">*</span></label>
+      <textarea id="q2" name="q2" required></textarea>
+      <p class="error-msg" id="q2-error">Esta resposta é obrigatória.</p>
     </div>
 
-    <!-- ═══ STEP 2 — Docente Q4-Q6 ═══ -->
-    <div class="step" data-step="2">
-      <span class="step-tag">Avaliação do Docente</span>
-      <h2>Contributo e sugestões</h2>
+    <div class="field">
+      <label class="field-label" for="q3"><span class="field-number">3.</span> Como caracteriza o acompanhamento prestado pelo docente aos alunos ao longo do semestre? <span class="required-star">*</span></label>
+      <textarea id="q3" name="q3" required></textarea>
+      <p class="error-msg" id="q3-error">Esta resposta é obrigatória.</p>
+    </div>
+  </div>
 
-      <div class="field">
-        <label class="field-label" for="q4">
-          <span class="field-number">4</span> Que contributo específico trouxe o docente para a sua compreensão dos instrumentos técnicos necessários à tomada de decisão na simulação empresarial? <span class="required-star">*</span>
-        </label>
-        <textarea id="q4" name="q4" required></textarea>
-        <p class="error-msg" id="q4-error">Esta resposta é obrigatória.</p>
-      </div>
+  <!-- ═══ STEP 2 — Q4-Q6 ═══ -->
+  <div class="step" data-step="2">
+    <span class="step-tag">Avaliação do Docente</span>
+    <h2>Contributo e sugestões</h2>
+    <hr class="sep">
 
-      <div class="field">
-        <label class="field-label" for="q5">
-          <span class="field-number">5</span> Em que medida o docente contribuiu para o desenvolvimento da sua capacidade analítica e pensamento estratégico durante o processo de simulação? <span class="required-star">*</span>
-        </label>
-        <textarea id="q5" name="q5" required></textarea>
-        <p class="error-msg" id="q5-error">Esta resposta é obrigatória.</p>
-      </div>
-
-      <div class="field">
-        <label class="field-label" for="q6">
-          <span class="field-number">6</span> O que sugere que o docente modifique para melhorar o ensino desta unidade curricular? <span class="required-star">*</span>
-        </label>
-        <textarea id="q6" name="q6" required></textarea>
-        <p class="error-msg" id="q6-error">Esta resposta é obrigatória.</p>
-      </div>
+    <div class="field">
+      <label class="field-label" for="q4"><span class="field-number">4.</span> Que contributo específico trouxe o docente para a sua compreensão dos instrumentos técnicos necessários à tomada de decisão na simulação empresarial? <span class="required-star">*</span></label>
+      <textarea id="q4" name="q4" required></textarea>
+      <p class="error-msg" id="q4-error">Esta resposta é obrigatória.</p>
     </div>
 
-    <!-- ═══ STEP 3 — UC Q7-Q8 ═══ -->
-    <div class="step" data-step="3">
-      <span class="step-tag">Avaliação da Unidade Curricular</span>
-      <h2>Conteúdos e estrutura</h2>
-
-      <div class="field">
-        <label class="field-label" for="q7">
-          <span class="field-number">7</span> Como avalia a relevância dos conteúdos abordados para a sua formação profissional? <span class="required-star">*</span>
-        </label>
-        <textarea id="q7" name="q7" required></textarea>
-        <p class="error-msg" id="q7-error">Esta resposta é obrigatória.</p>
-      </div>
-
-      <div class="field">
-        <label class="field-label" for="q8">
-          <span class="field-number">8</span> Identifique os pontos fortes e aspetos a melhorar na estrutura, organização e materiais desta unidade curricular. <span class="required-star">*</span>
-        </label>
-        <textarea id="q8" name="q8" required></textarea>
-        <p class="error-msg" id="q8-error">Esta resposta é obrigatória.</p>
-      </div>
+    <div class="field">
+      <label class="field-label" for="q5"><span class="field-number">5.</span> Em que medida o docente contribuiu para o desenvolvimento da sua capacidade analítica e pensamento estratégico durante o processo de simulação? <span class="required-star">*</span></label>
+      <textarea id="q5" name="q5" required></textarea>
+      <p class="error-msg" id="q5-error">Esta resposta é obrigatória.</p>
     </div>
 
-    <!-- ═══ STEP 4 — Q9 Desempenho do Docente ═══ -->
-    <div class="step" data-step="4">
-      <span class="step-tag">Avaliação Quantitativa</span>
-      <h2><span class="field-number">9</span> Desempenho do Docente</h2>
-      <p class="field-hint" style="margin-bottom:16px;">Marcar apenas uma opção por linha. <span class="required-star">*</span></p>
+    <div class="field">
+      <label class="field-label" for="q6"><span class="field-number">6.</span> O que sugere que o docente modifique para melhorar o ensino desta unidade curricular? <span class="required-star">*</span></label>
+      <textarea id="q6" name="q6" required></textarea>
+      <p class="error-msg" id="q6-error">Esta resposta é obrigatória.</p>
+    </div>
+  </div>
 
-      <div class="scale-legend">
-        <span><strong>1</strong> Insuficiente</span>
-        <span><strong>2</strong> Suficiente</span>
-        <span><strong>3</strong> Bom</span>
-        <span><strong>4</strong> Muito Bom</span>
-        <span><strong>5</strong> Excelente</span>
-      </div>
+  <!-- ═══ STEP 3 — Q7-Q8 ═══ -->
+  <div class="step" data-step="3">
+    <span class="step-tag">Avaliação da Unidade Curricular</span>
+    <h2>Conteúdos e estrutura</h2>
+    <hr class="sep">
 
-      <p class="error-msg" id="q9-error" style="margin-bottom:12px;">Por favor, classifique todos os itens.</p>
-
-      <div class="matrix-col-headers">
-        <span class="spacer"></span>
-        <span class="col-label">1</span>
-        <span class="col-label">2</span>
-        <span class="col-label">3</span>
-        <span class="col-label">4</span>
-        <span class="col-label">5</span>
-      </div>
-
-      <div class="matrix-row" data-name="q9_dominio_conteudos">
-        <span class="matrix-row-label">Domínio dos conteúdos</span>
-        <div class="matrix-radios">
-          <label class="radio-btn"><input type="radio" name="q9_dominio_conteudos" value="1"><span class="dot"></span><span class="scale-num">1</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_dominio_conteudos" value="2"><span class="dot"></span><span class="scale-num">2</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_dominio_conteudos" value="3"><span class="dot"></span><span class="scale-num">3</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_dominio_conteudos" value="4"><span class="dot"></span><span class="scale-num">4</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_dominio_conteudos" value="5"><span class="dot"></span><span class="scale-num">5</span></label>
-        </div>
-      </div>
-
-      <div class="matrix-row" data-name="q9_clareza_comunicacao">
-        <span class="matrix-row-label">Clareza na comunicação</span>
-        <div class="matrix-radios">
-          <label class="radio-btn"><input type="radio" name="q9_clareza_comunicacao" value="1"><span class="dot"></span><span class="scale-num">1</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_clareza_comunicacao" value="2"><span class="dot"></span><span class="scale-num">2</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_clareza_comunicacao" value="3"><span class="dot"></span><span class="scale-num">3</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_clareza_comunicacao" value="4"><span class="dot"></span><span class="scale-num">4</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_clareza_comunicacao" value="5"><span class="dot"></span><span class="scale-num">5</span></label>
-        </div>
-      </div>
-
-      <div class="matrix-row" data-name="q9_capacidade_motivar">
-        <span class="matrix-row-label">Capacidade de motivar os alunos</span>
-        <div class="matrix-radios">
-          <label class="radio-btn"><input type="radio" name="q9_capacidade_motivar" value="1"><span class="dot"></span><span class="scale-num">1</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_capacidade_motivar" value="2"><span class="dot"></span><span class="scale-num">2</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_capacidade_motivar" value="3"><span class="dot"></span><span class="scale-num">3</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_capacidade_motivar" value="4"><span class="dot"></span><span class="scale-num">4</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_capacidade_motivar" value="5"><span class="dot"></span><span class="scale-num">5</span></label>
-        </div>
-      </div>
-
-      <div class="matrix-row" data-name="q9_disponibilidade_duvidas">
-        <span class="matrix-row-label">Disponibilidade para esclarecer dúvidas</span>
-        <div class="matrix-radios">
-          <label class="radio-btn"><input type="radio" name="q9_disponibilidade_duvidas" value="1"><span class="dot"></span><span class="scale-num">1</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_disponibilidade_duvidas" value="2"><span class="dot"></span><span class="scale-num">2</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_disponibilidade_duvidas" value="3"><span class="dot"></span><span class="scale-num">3</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_disponibilidade_duvidas" value="4"><span class="dot"></span><span class="scale-num">4</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_disponibilidade_duvidas" value="5"><span class="dot"></span><span class="scale-num">5</span></label>
-        </div>
-      </div>
-
-      <div class="matrix-row" data-name="q9_feedback_trabalhos">
-        <span class="matrix-row-label">Feedback sobre trabalhos/avaliações</span>
-        <div class="matrix-radios">
-          <label class="radio-btn"><input type="radio" name="q9_feedback_trabalhos" value="1"><span class="dot"></span><span class="scale-num">1</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_feedback_trabalhos" value="2"><span class="dot"></span><span class="scale-num">2</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_feedback_trabalhos" value="3"><span class="dot"></span><span class="scale-num">3</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_feedback_trabalhos" value="4"><span class="dot"></span><span class="scale-num">4</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_feedback_trabalhos" value="5"><span class="dot"></span><span class="scale-num">5</span></label>
-        </div>
-      </div>
-
-      <div class="matrix-row" data-name="q9_pontualidade_gestao">
-        <span class="matrix-row-label">Pontualidade e gestão do tempo de aula</span>
-        <div class="matrix-radios">
-          <label class="radio-btn"><input type="radio" name="q9_pontualidade_gestao" value="1"><span class="dot"></span><span class="scale-num">1</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_pontualidade_gestao" value="2"><span class="dot"></span><span class="scale-num">2</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_pontualidade_gestao" value="3"><span class="dot"></span><span class="scale-num">3</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_pontualidade_gestao" value="4"><span class="dot"></span><span class="scale-num">4</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_pontualidade_gestao" value="5"><span class="dot"></span><span class="scale-num">5</span></label>
-        </div>
-      </div>
-
-      <div class="matrix-row" data-name="q9_relacionamento_alunos">
-        <span class="matrix-row-label">Relacionamento com os alunos</span>
-        <div class="matrix-radios">
-          <label class="radio-btn"><input type="radio" name="q9_relacionamento_alunos" value="1"><span class="dot"></span><span class="scale-num">1</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_relacionamento_alunos" value="2"><span class="dot"></span><span class="scale-num">2</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_relacionamento_alunos" value="3"><span class="dot"></span><span class="scale-num">3</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_relacionamento_alunos" value="4"><span class="dot"></span><span class="scale-num">4</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_relacionamento_alunos" value="5"><span class="dot"></span><span class="scale-num">5</span></label>
-        </div>
-      </div>
-
-      <div class="matrix-row" data-name="q9_apoio_relatorios">
-        <span class="matrix-row-label">Apoio na elaboração dos relatórios, atas e instrumentos</span>
-        <div class="matrix-radios">
-          <label class="radio-btn"><input type="radio" name="q9_apoio_relatorios" value="1"><span class="dot"></span><span class="scale-num">1</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_apoio_relatorios" value="2"><span class="dot"></span><span class="scale-num">2</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_apoio_relatorios" value="3"><span class="dot"></span><span class="scale-num">3</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_apoio_relatorios" value="4"><span class="dot"></span><span class="scale-num">4</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_apoio_relatorios" value="5"><span class="dot"></span><span class="scale-num">5</span></label>
-        </div>
-      </div>
-
-      <div class="matrix-row" data-name="q9_preparacao_simulacao">
-        <span class="matrix-row-label">Preparação para o contexto da simulação</span>
-        <div class="matrix-radios">
-          <label class="radio-btn"><input type="radio" name="q9_preparacao_simulacao" value="1"><span class="dot"></span><span class="scale-num">1</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_preparacao_simulacao" value="2"><span class="dot"></span><span class="scale-num">2</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_preparacao_simulacao" value="3"><span class="dot"></span><span class="scale-num">3</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_preparacao_simulacao" value="4"><span class="dot"></span><span class="scale-num">4</span></label>
-          <label class="radio-btn"><input type="radio" name="q9_preparacao_simulacao" value="5"><span class="dot"></span><span class="scale-num">5</span></label>
-        </div>
-      </div>
+    <div class="field">
+      <label class="field-label" for="q7"><span class="field-number">7.</span> Como avalia a relevância dos conteúdos abordados para a sua formação profissional? <span class="required-star">*</span></label>
+      <textarea id="q7" name="q7" required></textarea>
+      <p class="error-msg" id="q7-error">Esta resposta é obrigatória.</p>
     </div>
 
-    <!-- ═══ STEP 5 — Q10 Unidade Curricular ═══ -->
-    <div class="step" data-step="5">
-      <span class="step-tag">Avaliação Quantitativa</span>
-      <h2><span class="field-number">10</span> Unidade Curricular</h2>
-      <p class="field-hint" style="margin-bottom:16px;">Marcar apenas uma opção por linha. <span class="required-star">*</span></p>
+    <div class="field">
+      <label class="field-label" for="q8"><span class="field-number">8.</span> Identifique os pontos fortes e aspetos a melhorar na estrutura, organização e materiais desta unidade curricular. <span class="required-star">*</span></label>
+      <textarea id="q8" name="q8" required></textarea>
+      <p class="error-msg" id="q8-error">Esta resposta é obrigatória.</p>
+    </div>
+  </div>
 
-      <div class="scale-legend">
-        <span><strong>1</strong> Insuficiente</span>
-        <span><strong>2</strong> Suficiente</span>
-        <span><strong>3</strong> Bom</span>
-        <span><strong>4</strong> Muito Bom</span>
-        <span><strong>5</strong> Excelente</span>
-      </div>
+  <!-- ═══ STEP 4 — Q9 ═══ -->
+  <div class="step" data-step="4">
+    <span class="step-tag">Avaliação Quantitativa</span>
+    <h2><span class="field-number">9.</span> Desempenho do Docente <span class="required-star">*</span></h2>
+    <p class="field-hint" style="margin-bottom:14px;">Marcar apenas uma opção por linha.</p>
 
-      <p class="error-msg" id="q10-error" style="margin-bottom:12px;">Por favor, classifique todos os itens.</p>
-
-      <div class="matrix-col-headers">
-        <span class="spacer"></span>
-        <span class="col-label">1</span>
-        <span class="col-label">2</span>
-        <span class="col-label">3</span>
-        <span class="col-label">4</span>
-        <span class="col-label">5</span>
-      </div>
-
-      <div class="matrix-row" data-name="q10_clareza_objetivos">
-        <span class="matrix-row-label">Clareza dos objetivos</span>
-        <div class="matrix-radios">
-          <label class="radio-btn"><input type="radio" name="q10_clareza_objetivos" value="1"><span class="dot"></span><span class="scale-num">1</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_clareza_objetivos" value="2"><span class="dot"></span><span class="scale-num">2</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_clareza_objetivos" value="3"><span class="dot"></span><span class="scale-num">3</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_clareza_objetivos" value="4"><span class="dot"></span><span class="scale-num">4</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_clareza_objetivos" value="5"><span class="dot"></span><span class="scale-num">5</span></label>
-        </div>
-      </div>
-
-      <div class="matrix-row" data-name="q10_qualidade_materiais">
-        <span class="matrix-row-label">Qualidade dos materiais de apoio</span>
-        <div class="matrix-radios">
-          <label class="radio-btn"><input type="radio" name="q10_qualidade_materiais" value="1"><span class="dot"></span><span class="scale-num">1</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_qualidade_materiais" value="2"><span class="dot"></span><span class="scale-num">2</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_qualidade_materiais" value="3"><span class="dot"></span><span class="scale-num">3</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_qualidade_materiais" value="4"><span class="dot"></span><span class="scale-num">4</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_qualidade_materiais" value="5"><span class="dot"></span><span class="scale-num">5</span></label>
-        </div>
-      </div>
-
-      <div class="matrix-row" data-name="q10_relevancia_atividades">
-        <span class="matrix-row-label">Relevância das atividades práticas</span>
-        <div class="matrix-radios">
-          <label class="radio-btn"><input type="radio" name="q10_relevancia_atividades" value="1"><span class="dot"></span><span class="scale-num">1</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_relevancia_atividades" value="2"><span class="dot"></span><span class="scale-num">2</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_relevancia_atividades" value="3"><span class="dot"></span><span class="scale-num">3</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_relevancia_atividades" value="4"><span class="dot"></span><span class="scale-num">4</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_relevancia_atividades" value="5"><span class="dot"></span><span class="scale-num">5</span></label>
-        </div>
-      </div>
-
-      <div class="matrix-row" data-name="q10_adequacao_avaliacao">
-        <span class="matrix-row-label">Adequação dos métodos de avaliação</span>
-        <div class="matrix-radios">
-          <label class="radio-btn"><input type="radio" name="q10_adequacao_avaliacao" value="1"><span class="dot"></span><span class="scale-num">1</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_adequacao_avaliacao" value="2"><span class="dot"></span><span class="scale-num">2</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_adequacao_avaliacao" value="3"><span class="dot"></span><span class="scale-num">3</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_adequacao_avaliacao" value="4"><span class="dot"></span><span class="scale-num">4</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_adequacao_avaliacao" value="5"><span class="dot"></span><span class="scale-num">5</span></label>
-        </div>
-      </div>
-
-      <div class="matrix-row" data-name="q10_articulacao_teoria_pratica">
-        <span class="matrix-row-label">Articulação entre teoria e prática</span>
-        <div class="matrix-radios">
-          <label class="radio-btn"><input type="radio" name="q10_articulacao_teoria_pratica" value="1"><span class="dot"></span><span class="scale-num">1</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_articulacao_teoria_pratica" value="2"><span class="dot"></span><span class="scale-num">2</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_articulacao_teoria_pratica" value="3"><span class="dot"></span><span class="scale-num">3</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_articulacao_teoria_pratica" value="4"><span class="dot"></span><span class="scale-num">4</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_articulacao_teoria_pratica" value="5"><span class="dot"></span><span class="scale-num">5</span></label>
-        </div>
-      </div>
-
-      <div class="matrix-row" data-name="q10_contributo_formacao">
-        <span class="matrix-row-label">Contributo para a sua formação profissional</span>
-        <div class="matrix-radios">
-          <label class="radio-btn"><input type="radio" name="q10_contributo_formacao" value="1"><span class="dot"></span><span class="scale-num">1</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_contributo_formacao" value="2"><span class="dot"></span><span class="scale-num">2</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_contributo_formacao" value="3"><span class="dot"></span><span class="scale-num">3</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_contributo_formacao" value="4"><span class="dot"></span><span class="scale-num">4</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_contributo_formacao" value="5"><span class="dot"></span><span class="scale-num">5</span></label>
-        </div>
-      </div>
-
-      <div class="matrix-row" data-name="q10_adequacao_calendario">
-        <span class="matrix-row-label">Adequação do calendário de atividades</span>
-        <div class="matrix-radios">
-          <label class="radio-btn"><input type="radio" name="q10_adequacao_calendario" value="1"><span class="dot"></span><span class="scale-num">1</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_adequacao_calendario" value="2"><span class="dot"></span><span class="scale-num">2</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_adequacao_calendario" value="3"><span class="dot"></span><span class="scale-num">3</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_adequacao_calendario" value="4"><span class="dot"></span><span class="scale-num">4</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_adequacao_calendario" value="5"><span class="dot"></span><span class="scale-num">5</span></label>
-        </div>
-      </div>
-
-      <div class="matrix-row" data-name="q10_organizacao_simulacao">
-        <span class="matrix-row-label">Organização do processo de simulação</span>
-        <div class="matrix-radios">
-          <label class="radio-btn"><input type="radio" name="q10_organizacao_simulacao" value="1"><span class="dot"></span><span class="scale-num">1</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_organizacao_simulacao" value="2"><span class="dot"></span><span class="scale-num">2</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_organizacao_simulacao" value="3"><span class="dot"></span><span class="scale-num">3</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_organizacao_simulacao" value="4"><span class="dot"></span><span class="scale-num">4</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_organizacao_simulacao" value="5"><span class="dot"></span><span class="scale-num">5</span></label>
-        </div>
-      </div>
-
-      <div class="matrix-row" data-name="q10_tempo_decisoes">
-        <span class="matrix-row-label">Tempo disponível para a tomada de decisões</span>
-        <div class="matrix-radios">
-          <label class="radio-btn"><input type="radio" name="q10_tempo_decisoes" value="1"><span class="dot"></span><span class="scale-num">1</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_tempo_decisoes" value="2"><span class="dot"></span><span class="scale-num">2</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_tempo_decisoes" value="3"><span class="dot"></span><span class="scale-num">3</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_tempo_decisoes" value="4"><span class="dot"></span><span class="scale-num">4</span></label>
-          <label class="radio-btn"><input type="radio" name="q10_tempo_decisoes" value="5"><span class="dot"></span><span class="scale-num">5</span></label>
-        </div>
-      </div>
+    <div class="scale-legend">
+      <span><strong>1</strong> Insuficiente</span>
+      <span><strong>2</strong> Suficiente</span>
+      <span><strong>3</strong> Bom</span>
+      <span><strong>4</strong> Muito Bom</span>
+      <span><strong>5</strong> Excelente</span>
     </div>
 
-    <!-- ═══ STEP 6 — Q11 Componentes Específicas ═══ -->
-    <div class="step" data-step="6">
-      <span class="step-tag">Avaliação Quantitativa</span>
-      <h2><span class="field-number">11</span> Componentes Específicas da Simulação</h2>
-      <p class="field-hint" style="margin-bottom:16px;">Marcar apenas uma opção por linha. <span class="required-star">*</span></p>
+    <p class="error-msg" id="q9-error" style="margin-bottom:10px;">Por favor, classifique todos os itens.</p>
 
-      <div class="scale-legend">
-        <span><strong>1</strong> Insuficiente</span>
-        <span><strong>2</strong> Suficiente</span>
-        <span><strong>3</strong> Bom</span>
-        <span><strong>4</strong> Muito Bom</span>
-        <span><strong>5</strong> Excelente</span>
-      </div>
+    <div class="matrix-col-headers"><span class="spacer"></span><span class="col-label">1</span><span class="col-label">2</span><span class="col-label">3</span><span class="col-label">4</span><span class="col-label">5</span></div>
 
-      <p class="error-msg" id="q11-error" style="margin-bottom:12px;">Por favor, classifique todos os itens.</p>
+    <div class="matrix-row" data-name="q9_dominio_conteudos"><span class="matrix-row-label">Domínio dos conteúdos</span><div class="matrix-radios"><label class="radio-btn"><input type="radio" name="q9_dominio_conteudos" value="1"><span class="dot"></span><span class="scale-num">1</span></label><label class="radio-btn"><input type="radio" name="q9_dominio_conteudos" value="2"><span class="dot"></span><span class="scale-num">2</span></label><label class="radio-btn"><input type="radio" name="q9_dominio_conteudos" value="3"><span class="dot"></span><span class="scale-num">3</span></label><label class="radio-btn"><input type="radio" name="q9_dominio_conteudos" value="4"><span class="dot"></span><span class="scale-num">4</span></label><label class="radio-btn"><input type="radio" name="q9_dominio_conteudos" value="5"><span class="dot"></span><span class="scale-num">5</span></label></div></div>
 
-      <div class="matrix-col-headers">
-        <span class="spacer"></span>
-        <span class="col-label">1</span>
-        <span class="col-label">2</span>
-        <span class="col-label">3</span>
-        <span class="col-label">4</span>
-        <span class="col-label">5</span>
-      </div>
+    <div class="matrix-row" data-name="q9_clareza_comunicacao"><span class="matrix-row-label">Clareza na comunicação</span><div class="matrix-radios"><label class="radio-btn"><input type="radio" name="q9_clareza_comunicacao" value="1"><span class="dot"></span><span class="scale-num">1</span></label><label class="radio-btn"><input type="radio" name="q9_clareza_comunicacao" value="2"><span class="dot"></span><span class="scale-num">2</span></label><label class="radio-btn"><input type="radio" name="q9_clareza_comunicacao" value="3"><span class="dot"></span><span class="scale-num">3</span></label><label class="radio-btn"><input type="radio" name="q9_clareza_comunicacao" value="4"><span class="dot"></span><span class="scale-num">4</span></label><label class="radio-btn"><input type="radio" name="q9_clareza_comunicacao" value="5"><span class="dot"></span><span class="scale-num">5</span></label></div></div>
 
-      <div class="matrix-row" data-name="q11_eficacia_plataforma">
-        <span class="matrix-row-label">Eficácia da plataforma de submissão das decisões</span>
-        <div class="matrix-radios">
-          <label class="radio-btn"><input type="radio" name="q11_eficacia_plataforma" value="1"><span class="dot"></span><span class="scale-num">1</span></label>
-          <label class="radio-btn"><input type="radio" name="q11_eficacia_plataforma" value="2"><span class="dot"></span><span class="scale-num">2</span></label>
-          <label class="radio-btn"><input type="radio" name="q11_eficacia_plataforma" value="3"><span class="dot"></span><span class="scale-num">3</span></label>
-          <label class="radio-btn"><input type="radio" name="q11_eficacia_plataforma" value="4"><span class="dot"></span><span class="scale-num">4</span></label>
-          <label class="radio-btn"><input type="radio" name="q11_eficacia_plataforma" value="5"><span class="dot"></span><span class="scale-num">5</span></label>
-        </div>
-      </div>
+    <div class="matrix-row" data-name="q9_capacidade_motivar"><span class="matrix-row-label">Capacidade de motivar os alunos</span><div class="matrix-radios"><label class="radio-btn"><input type="radio" name="q9_capacidade_motivar" value="1"><span class="dot"></span><span class="scale-num">1</span></label><label class="radio-btn"><input type="radio" name="q9_capacidade_motivar" value="2"><span class="dot"></span><span class="scale-num">2</span></label><label class="radio-btn"><input type="radio" name="q9_capacidade_motivar" value="3"><span class="dot"></span><span class="scale-num">3</span></label><label class="radio-btn"><input type="radio" name="q9_capacidade_motivar" value="4"><span class="dot"></span><span class="scale-num">4</span></label><label class="radio-btn"><input type="radio" name="q9_capacidade_motivar" value="5"><span class="dot"></span><span class="scale-num">5</span></label></div></div>
 
-      <div class="matrix-row" data-name="q11_qualidade_relatorios">
-        <span class="matrix-row-label">Qualidade dos relatórios de gestão disponibilizados</span>
-        <div class="matrix-radios">
-          <label class="radio-btn"><input type="radio" name="q11_qualidade_relatorios" value="1"><span class="dot"></span><span class="scale-num">1</span></label>
-          <label class="radio-btn"><input type="radio" name="q11_qualidade_relatorios" value="2"><span class="dot"></span><span class="scale-num">2</span></label>
-          <label class="radio-btn"><input type="radio" name="q11_qualidade_relatorios" value="3"><span class="dot"></span><span class="scale-num">3</span></label>
-          <label class="radio-btn"><input type="radio" name="q11_qualidade_relatorios" value="4"><span class="dot"></span><span class="scale-num">4</span></label>
-          <label class="radio-btn"><input type="radio" name="q11_qualidade_relatorios" value="5"><span class="dot"></span><span class="scale-num">5</span></label>
-        </div>
-      </div>
+    <div class="matrix-row" data-name="q9_disponibilidade_duvidas"><span class="matrix-row-label">Disponibilidade para esclarecer dúvidas</span><div class="matrix-radios"><label class="radio-btn"><input type="radio" name="q9_disponibilidade_duvidas" value="1"><span class="dot"></span><span class="scale-num">1</span></label><label class="radio-btn"><input type="radio" name="q9_disponibilidade_duvidas" value="2"><span class="dot"></span><span class="scale-num">2</span></label><label class="radio-btn"><input type="radio" name="q9_disponibilidade_duvidas" value="3"><span class="dot"></span><span class="scale-num">3</span></label><label class="radio-btn"><input type="radio" name="q9_disponibilidade_duvidas" value="4"><span class="dot"></span><span class="scale-num">4</span></label><label class="radio-btn"><input type="radio" name="q9_disponibilidade_duvidas" value="5"><span class="dot"></span><span class="scale-num">5</span></label></div></div>
 
-      <div class="matrix-row" data-name="q11_adequacao_posicao_competitiva">
-        <span class="matrix-row-label">Adequação dos critérios de avaliação da Posição Competitiva</span>
-        <div class="matrix-radios">
-          <label class="radio-btn"><input type="radio" name="q11_adequacao_posicao_competitiva" value="1"><span class="dot"></span><span class="scale-num">1</span></label>
-          <label class="radio-btn"><input type="radio" name="q11_adequacao_posicao_competitiva" value="2"><span class="dot"></span><span class="scale-num">2</span></label>
-          <label class="radio-btn"><input type="radio" name="q11_adequacao_posicao_competitiva" value="3"><span class="dot"></span><span class="scale-num">3</span></label>
-          <label class="radio-btn"><input type="radio" name="q11_adequacao_posicao_competitiva" value="4"><span class="dot"></span><span class="scale-num">4</span></label>
-          <label class="radio-btn"><input type="radio" name="q11_adequacao_posicao_competitiva" value="5"><span class="dot"></span><span class="scale-num">5</span></label>
-        </div>
-      </div>
+    <div class="matrix-row" data-name="q9_feedback_trabalhos"><span class="matrix-row-label">Feedback sobre trabalhos/avaliações</span><div class="matrix-radios"><label class="radio-btn"><input type="radio" name="q9_feedback_trabalhos" value="1"><span class="dot"></span><span class="scale-num">1</span></label><label class="radio-btn"><input type="radio" name="q9_feedback_trabalhos" value="2"><span class="dot"></span><span class="scale-num">2</span></label><label class="radio-btn"><input type="radio" name="q9_feedback_trabalhos" value="3"><span class="dot"></span><span class="scale-num">3</span></label><label class="radio-btn"><input type="radio" name="q9_feedback_trabalhos" value="4"><span class="dot"></span><span class="scale-num">4</span></label><label class="radio-btn"><input type="radio" name="q9_feedback_trabalhos" value="5"><span class="dot"></span><span class="scale-num">5</span></label></div></div>
 
-      <div class="matrix-row" data-name="q11_adequacao_capacidade_tecnica">
-        <span class="matrix-row-label">Adequação dos critérios de avaliação da Capacidade Técnica</span>
-        <div class="matrix-radios">
-          <label class="radio-btn"><input type="radio" name="q11_adequacao_capacidade_tecnica" value="1"><span class="dot"></span><span class="scale-num">1</span></label>
-          <label class="radio-btn"><input type="radio" name="q11_adequacao_capacidade_tecnica" value="2"><span class="dot"></span><span class="scale-num">2</span></label>
-          <label class="radio-btn"><input type="radio" name="q11_adequacao_capacidade_tecnica" value="3"><span class="dot"></span><span class="scale-num">3</span></label>
-          <label class="radio-btn"><input type="radio" name="q11_adequacao_capacidade_tecnica" value="4"><span class="dot"></span><span class="scale-num">4</span></label>
-          <label class="radio-btn"><input type="radio" name="q11_adequacao_capacidade_tecnica" value="5"><span class="dot"></span><span class="scale-num">5</span></label>
-        </div>
-      </div>
+    <div class="matrix-row" data-name="q9_pontualidade_gestao"><span class="matrix-row-label">Pontualidade e gestão do tempo de aula</span><div class="matrix-radios"><label class="radio-btn"><input type="radio" name="q9_pontualidade_gestao" value="1"><span class="dot"></span><span class="scale-num">1</span></label><label class="radio-btn"><input type="radio" name="q9_pontualidade_gestao" value="2"><span class="dot"></span><span class="scale-num">2</span></label><label class="radio-btn"><input type="radio" name="q9_pontualidade_gestao" value="3"><span class="dot"></span><span class="scale-num">3</span></label><label class="radio-btn"><input type="radio" name="q9_pontualidade_gestao" value="4"><span class="dot"></span><span class="scale-num">4</span></label><label class="radio-btn"><input type="radio" name="q9_pontualidade_gestao" value="5"><span class="dot"></span><span class="scale-num">5</span></label></div></div>
 
-      <div class="matrix-row" data-name="q11_equilibrio_avaliacao">
-        <span class="matrix-row-label">Equilíbrio global do sistema de avaliação</span>
-        <div class="matrix-radios">
-          <label class="radio-btn"><input type="radio" name="q11_equilibrio_avaliacao" value="1"><span class="dot"></span><span class="scale-num">1</span></label>
-          <label class="radio-btn"><input type="radio" name="q11_equilibrio_avaliacao" value="2"><span class="dot"></span><span class="scale-num">2</span></label>
-          <label class="radio-btn"><input type="radio" name="q11_equilibrio_avaliacao" value="3"><span class="dot"></span><span class="scale-num">3</span></label>
-          <label class="radio-btn"><input type="radio" name="q11_equilibrio_avaliacao" value="4"><span class="dot"></span><span class="scale-num">4</span></label>
-          <label class="radio-btn"><input type="radio" name="q11_equilibrio_avaliacao" value="5"><span class="dot"></span><span class="scale-num">5</span></label>
-        </div>
-      </div>
+    <div class="matrix-row" data-name="q9_relacionamento_alunos"><span class="matrix-row-label">Relacionamento com os alunos</span><div class="matrix-radios"><label class="radio-btn"><input type="radio" name="q9_relacionamento_alunos" value="1"><span class="dot"></span><span class="scale-num">1</span></label><label class="radio-btn"><input type="radio" name="q9_relacionamento_alunos" value="2"><span class="dot"></span><span class="scale-num">2</span></label><label class="radio-btn"><input type="radio" name="q9_relacionamento_alunos" value="3"><span class="dot"></span><span class="scale-num">3</span></label><label class="radio-btn"><input type="radio" name="q9_relacionamento_alunos" value="4"><span class="dot"></span><span class="scale-num">4</span></label><label class="radio-btn"><input type="radio" name="q9_relacionamento_alunos" value="5"><span class="dot"></span><span class="scale-num">5</span></label></div></div>
+
+    <div class="matrix-row" data-name="q9_apoio_relatorios"><span class="matrix-row-label">Apoio na elaboração dos relatórios, atas e instrumentos</span><div class="matrix-radios"><label class="radio-btn"><input type="radio" name="q9_apoio_relatorios" value="1"><span class="dot"></span><span class="scale-num">1</span></label><label class="radio-btn"><input type="radio" name="q9_apoio_relatorios" value="2"><span class="dot"></span><span class="scale-num">2</span></label><label class="radio-btn"><input type="radio" name="q9_apoio_relatorios" value="3"><span class="dot"></span><span class="scale-num">3</span></label><label class="radio-btn"><input type="radio" name="q9_apoio_relatorios" value="4"><span class="dot"></span><span class="scale-num">4</span></label><label class="radio-btn"><input type="radio" name="q9_apoio_relatorios" value="5"><span class="dot"></span><span class="scale-num">5</span></label></div></div>
+
+    <div class="matrix-row" data-name="q9_preparacao_simulacao"><span class="matrix-row-label">Preparação para o contexto da simulação</span><div class="matrix-radios"><label class="radio-btn"><input type="radio" name="q9_preparacao_simulacao" value="1"><span class="dot"></span><span class="scale-num">1</span></label><label class="radio-btn"><input type="radio" name="q9_preparacao_simulacao" value="2"><span class="dot"></span><span class="scale-num">2</span></label><label class="radio-btn"><input type="radio" name="q9_preparacao_simulacao" value="3"><span class="dot"></span><span class="scale-num">3</span></label><label class="radio-btn"><input type="radio" name="q9_preparacao_simulacao" value="4"><span class="dot"></span><span class="scale-num">4</span></label><label class="radio-btn"><input type="radio" name="q9_preparacao_simulacao" value="5"><span class="dot"></span><span class="scale-num">5</span></label></div></div>
+  </div>
+
+  <!-- ═══ STEP 5 — Q10 ═══ -->
+  <div class="step" data-step="5">
+    <span class="step-tag">Avaliação Quantitativa</span>
+    <h2><span class="field-number">10.</span> Unidade Curricular <span class="required-star">*</span></h2>
+    <p class="field-hint" style="margin-bottom:14px;">Marcar apenas uma opção por linha.</p>
+
+    <div class="scale-legend">
+      <span><strong>1</strong> Insuficiente</span>
+      <span><strong>2</strong> Suficiente</span>
+      <span><strong>3</strong> Bom</span>
+      <span><strong>4</strong> Muito Bom</span>
+      <span><strong>5</strong> Excelente</span>
     </div>
 
-    <!-- ═══ Navigation ═══ -->
-    <div class="nav-bar" id="navBar">
-      <button type="button" class="btn btn-back" id="btnBack" style="display:none;">Anterior</button>
-      <button type="button" class="btn btn-next" id="btnNext">Seguinte</button>
+    <p class="error-msg" id="q10-error" style="margin-bottom:10px;">Por favor, classifique todos os itens.</p>
+
+    <div class="matrix-col-headers"><span class="spacer"></span><span class="col-label">1</span><span class="col-label">2</span><span class="col-label">3</span><span class="col-label">4</span><span class="col-label">5</span></div>
+
+    <div class="matrix-row" data-name="q10_clareza_objetivos"><span class="matrix-row-label">Clareza dos objetivos</span><div class="matrix-radios"><label class="radio-btn"><input type="radio" name="q10_clareza_objetivos" value="1"><span class="dot"></span><span class="scale-num">1</span></label><label class="radio-btn"><input type="radio" name="q10_clareza_objetivos" value="2"><span class="dot"></span><span class="scale-num">2</span></label><label class="radio-btn"><input type="radio" name="q10_clareza_objetivos" value="3"><span class="dot"></span><span class="scale-num">3</span></label><label class="radio-btn"><input type="radio" name="q10_clareza_objetivos" value="4"><span class="dot"></span><span class="scale-num">4</span></label><label class="radio-btn"><input type="radio" name="q10_clareza_objetivos" value="5"><span class="dot"></span><span class="scale-num">5</span></label></div></div>
+
+    <div class="matrix-row" data-name="q10_qualidade_materiais"><span class="matrix-row-label">Qualidade dos materiais de apoio</span><div class="matrix-radios"><label class="radio-btn"><input type="radio" name="q10_qualidade_materiais" value="1"><span class="dot"></span><span class="scale-num">1</span></label><label class="radio-btn"><input type="radio" name="q10_qualidade_materiais" value="2"><span class="dot"></span><span class="scale-num">2</span></label><label class="radio-btn"><input type="radio" name="q10_qualidade_materiais" value="3"><span class="dot"></span><span class="scale-num">3</span></label><label class="radio-btn"><input type="radio" name="q10_qualidade_materiais" value="4"><span class="dot"></span><span class="scale-num">4</span></label><label class="radio-btn"><input type="radio" name="q10_qualidade_materiais" value="5"><span class="dot"></span><span class="scale-num">5</span></label></div></div>
+
+    <div class="matrix-row" data-name="q10_relevancia_atividades"><span class="matrix-row-label">Relevância das atividades práticas</span><div class="matrix-radios"><label class="radio-btn"><input type="radio" name="q10_relevancia_atividades" value="1"><span class="dot"></span><span class="scale-num">1</span></label><label class="radio-btn"><input type="radio" name="q10_relevancia_atividades" value="2"><span class="dot"></span><span class="scale-num">2</span></label><label class="radio-btn"><input type="radio" name="q10_relevancia_atividades" value="3"><span class="dot"></span><span class="scale-num">3</span></label><label class="radio-btn"><input type="radio" name="q10_relevancia_atividades" value="4"><span class="dot"></span><span class="scale-num">4</span></label><label class="radio-btn"><input type="radio" name="q10_relevancia_atividades" value="5"><span class="dot"></span><span class="scale-num">5</span></label></div></div>
+
+    <div class="matrix-row" data-name="q10_adequacao_avaliacao"><span class="matrix-row-label">Adequação dos métodos de avaliação</span><div class="matrix-radios"><label class="radio-btn"><input type="radio" name="q10_adequacao_avaliacao" value="1"><span class="dot"></span><span class="scale-num">1</span></label><label class="radio-btn"><input type="radio" name="q10_adequacao_avaliacao" value="2"><span class="dot"></span><span class="scale-num">2</span></label><label class="radio-btn"><input type="radio" name="q10_adequacao_avaliacao" value="3"><span class="dot"></span><span class="scale-num">3</span></label><label class="radio-btn"><input type="radio" name="q10_adequacao_avaliacao" value="4"><span class="dot"></span><span class="scale-num">4</span></label><label class="radio-btn"><input type="radio" name="q10_adequacao_avaliacao" value="5"><span class="dot"></span><span class="scale-num">5</span></label></div></div>
+
+    <div class="matrix-row" data-name="q10_articulacao_teoria_pratica"><span class="matrix-row-label">Articulação entre teoria e prática</span><div class="matrix-radios"><label class="radio-btn"><input type="radio" name="q10_articulacao_teoria_pratica" value="1"><span class="dot"></span><span class="scale-num">1</span></label><label class="radio-btn"><input type="radio" name="q10_articulacao_teoria_pratica" value="2"><span class="dot"></span><span class="scale-num">2</span></label><label class="radio-btn"><input type="radio" name="q10_articulacao_teoria_pratica" value="3"><span class="dot"></span><span class="scale-num">3</span></label><label class="radio-btn"><input type="radio" name="q10_articulacao_teoria_pratica" value="4"><span class="dot"></span><span class="scale-num">4</span></label><label class="radio-btn"><input type="radio" name="q10_articulacao_teoria_pratica" value="5"><span class="dot"></span><span class="scale-num">5</span></label></div></div>
+
+    <div class="matrix-row" data-name="q10_contributo_formacao"><span class="matrix-row-label">Contributo para a sua formação profissional</span><div class="matrix-radios"><label class="radio-btn"><input type="radio" name="q10_contributo_formacao" value="1"><span class="dot"></span><span class="scale-num">1</span></label><label class="radio-btn"><input type="radio" name="q10_contributo_formacao" value="2"><span class="dot"></span><span class="scale-num">2</span></label><label class="radio-btn"><input type="radio" name="q10_contributo_formacao" value="3"><span class="dot"></span><span class="scale-num">3</span></label><label class="radio-btn"><input type="radio" name="q10_contributo_formacao" value="4"><span class="dot"></span><span class="scale-num">4</span></label><label class="radio-btn"><input type="radio" name="q10_contributo_formacao" value="5"><span class="dot"></span><span class="scale-num">5</span></label></div></div>
+
+    <div class="matrix-row" data-name="q10_adequacao_calendario"><span class="matrix-row-label">Adequação do calendário de atividades</span><div class="matrix-radios"><label class="radio-btn"><input type="radio" name="q10_adequacao_calendario" value="1"><span class="dot"></span><span class="scale-num">1</span></label><label class="radio-btn"><input type="radio" name="q10_adequacao_calendario" value="2"><span class="dot"></span><span class="scale-num">2</span></label><label class="radio-btn"><input type="radio" name="q10_adequacao_calendario" value="3"><span class="dot"></span><span class="scale-num">3</span></label><label class="radio-btn"><input type="radio" name="q10_adequacao_calendario" value="4"><span class="dot"></span><span class="scale-num">4</span></label><label class="radio-btn"><input type="radio" name="q10_adequacao_calendario" value="5"><span class="dot"></span><span class="scale-num">5</span></label></div></div>
+
+    <div class="matrix-row" data-name="q10_organizacao_simulacao"><span class="matrix-row-label">Organização do processo de simulação</span><div class="matrix-radios"><label class="radio-btn"><input type="radio" name="q10_organizacao_simulacao" value="1"><span class="dot"></span><span class="scale-num">1</span></label><label class="radio-btn"><input type="radio" name="q10_organizacao_simulacao" value="2"><span class="dot"></span><span class="scale-num">2</span></label><label class="radio-btn"><input type="radio" name="q10_organizacao_simulacao" value="3"><span class="dot"></span><span class="scale-num">3</span></label><label class="radio-btn"><input type="radio" name="q10_organizacao_simulacao" value="4"><span class="dot"></span><span class="scale-num">4</span></label><label class="radio-btn"><input type="radio" name="q10_organizacao_simulacao" value="5"><span class="dot"></span><span class="scale-num">5</span></label></div></div>
+
+    <div class="matrix-row" data-name="q10_tempo_decisoes"><span class="matrix-row-label">Tempo disponível para a tomada de decisões</span><div class="matrix-radios"><label class="radio-btn"><input type="radio" name="q10_tempo_decisoes" value="1"><span class="dot"></span><span class="scale-num">1</span></label><label class="radio-btn"><input type="radio" name="q10_tempo_decisoes" value="2"><span class="dot"></span><span class="scale-num">2</span></label><label class="radio-btn"><input type="radio" name="q10_tempo_decisoes" value="3"><span class="dot"></span><span class="scale-num">3</span></label><label class="radio-btn"><input type="radio" name="q10_tempo_decisoes" value="4"><span class="dot"></span><span class="scale-num">4</span></label><label class="radio-btn"><input type="radio" name="q10_tempo_decisoes" value="5"><span class="dot"></span><span class="scale-num">5</span></label></div></div>
+  </div>
+
+  <!-- ═══ STEP 6 — Q11 ═══ -->
+  <div class="step" data-step="6">
+    <span class="step-tag">Avaliação Quantitativa</span>
+    <h2><span class="field-number">11.</span> Componentes Específicas da Simulação <span class="required-star">*</span></h2>
+    <p class="field-hint" style="margin-bottom:14px;">Marcar apenas uma opção por linha.</p>
+
+    <div class="scale-legend">
+      <span><strong>1</strong> Insuficiente</span>
+      <span><strong>2</strong> Suficiente</span>
+      <span><strong>3</strong> Bom</span>
+      <span><strong>4</strong> Muito Bom</span>
+      <span><strong>5</strong> Excelente</span>
     </div>
 
-  </div><!-- /card -->
+    <p class="error-msg" id="q11-error" style="margin-bottom:10px;">Por favor, classifique todos os itens.</p>
+
+    <div class="matrix-col-headers"><span class="spacer"></span><span class="col-label">1</span><span class="col-label">2</span><span class="col-label">3</span><span class="col-label">4</span><span class="col-label">5</span></div>
+
+    <div class="matrix-row" data-name="q11_eficacia_plataforma"><span class="matrix-row-label">Eficácia da plataforma de submissão das decisões</span><div class="matrix-radios"><label class="radio-btn"><input type="radio" name="q11_eficacia_plataforma" value="1"><span class="dot"></span><span class="scale-num">1</span></label><label class="radio-btn"><input type="radio" name="q11_eficacia_plataforma" value="2"><span class="dot"></span><span class="scale-num">2</span></label><label class="radio-btn"><input type="radio" name="q11_eficacia_plataforma" value="3"><span class="dot"></span><span class="scale-num">3</span></label><label class="radio-btn"><input type="radio" name="q11_eficacia_plataforma" value="4"><span class="dot"></span><span class="scale-num">4</span></label><label class="radio-btn"><input type="radio" name="q11_eficacia_plataforma" value="5"><span class="dot"></span><span class="scale-num">5</span></label></div></div>
+
+    <div class="matrix-row" data-name="q11_qualidade_relatorios"><span class="matrix-row-label">Qualidade dos relatórios de gestão disponibilizados</span><div class="matrix-radios"><label class="radio-btn"><input type="radio" name="q11_qualidade_relatorios" value="1"><span class="dot"></span><span class="scale-num">1</span></label><label class="radio-btn"><input type="radio" name="q11_qualidade_relatorios" value="2"><span class="dot"></span><span class="scale-num">2</span></label><label class="radio-btn"><input type="radio" name="q11_qualidade_relatorios" value="3"><span class="dot"></span><span class="scale-num">3</span></label><label class="radio-btn"><input type="radio" name="q11_qualidade_relatorios" value="4"><span class="dot"></span><span class="scale-num">4</span></label><label class="radio-btn"><input type="radio" name="q11_qualidade_relatorios" value="5"><span class="dot"></span><span class="scale-num">5</span></label></div></div>
+
+    <div class="matrix-row" data-name="q11_adequacao_posicao_competitiva"><span class="matrix-row-label">Adequação dos critérios de avaliação da Posição Competitiva</span><div class="matrix-radios"><label class="radio-btn"><input type="radio" name="q11_adequacao_posicao_competitiva" value="1"><span class="dot"></span><span class="scale-num">1</span></label><label class="radio-btn"><input type="radio" name="q11_adequacao_posicao_competitiva" value="2"><span class="dot"></span><span class="scale-num">2</span></label><label class="radio-btn"><input type="radio" name="q11_adequacao_posicao_competitiva" value="3"><span class="dot"></span><span class="scale-num">3</span></label><label class="radio-btn"><input type="radio" name="q11_adequacao_posicao_competitiva" value="4"><span class="dot"></span><span class="scale-num">4</span></label><label class="radio-btn"><input type="radio" name="q11_adequacao_posicao_competitiva" value="5"><span class="dot"></span><span class="scale-num">5</span></label></div></div>
+
+    <div class="matrix-row" data-name="q11_adequacao_capacidade_tecnica"><span class="matrix-row-label">Adequação dos critérios de avaliação da Capacidade Técnica</span><div class="matrix-radios"><label class="radio-btn"><input type="radio" name="q11_adequacao_capacidade_tecnica" value="1"><span class="dot"></span><span class="scale-num">1</span></label><label class="radio-btn"><input type="radio" name="q11_adequacao_capacidade_tecnica" value="2"><span class="dot"></span><span class="scale-num">2</span></label><label class="radio-btn"><input type="radio" name="q11_adequacao_capacidade_tecnica" value="3"><span class="dot"></span><span class="scale-num">3</span></label><label class="radio-btn"><input type="radio" name="q11_adequacao_capacidade_tecnica" value="4"><span class="dot"></span><span class="scale-num">4</span></label><label class="radio-btn"><input type="radio" name="q11_adequacao_capacidade_tecnica" value="5"><span class="dot"></span><span class="scale-num">5</span></label></div></div>
+
+    <div class="matrix-row" data-name="q11_equilibrio_avaliacao"><span class="matrix-row-label">Equilíbrio global do sistema de avaliação</span><div class="matrix-radios"><label class="radio-btn"><input type="radio" name="q11_equilibrio_avaliacao" value="1"><span class="dot"></span><span class="scale-num">1</span></label><label class="radio-btn"><input type="radio" name="q11_equilibrio_avaliacao" value="2"><span class="dot"></span><span class="scale-num">2</span></label><label class="radio-btn"><input type="radio" name="q11_equilibrio_avaliacao" value="3"><span class="dot"></span><span class="scale-num">3</span></label><label class="radio-btn"><input type="radio" name="q11_equilibrio_avaliacao" value="4"><span class="dot"></span><span class="scale-num">4</span></label><label class="radio-btn"><input type="radio" name="q11_equilibrio_avaliacao" value="5"><span class="dot"></span><span class="scale-num">5</span></label></div></div>
+  </div>
+
+  <!-- ═══ Navigation ═══ -->
+  <div class="nav-bar" id="navBar">
+    <button type="button" class="btn btn-back" id="btnBack" style="display:none;">Anterior</button>
+    <button type="button" class="btn btn-next" id="btnNext">Seguinte</button>
+  </div>
 
   <!-- ═══ Success ═══ -->
-  <div class="card success-screen" id="successScreen">
-    <div class="success-icon">
-      <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+  <div class="success-screen" id="successScreen">
+    <div class="check-mark">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
     </div>
-    <h2>Resposta registada com sucesso</h2>
+    <h2>Resposta registada</h2>
     <p>Obrigado pela sua participação. As suas respostas foram guardadas e serão tratadas de forma confidencial.</p>
   </div>
 
-</div><!-- /app -->
+</div>
 
 <script>
 (function () {
@@ -1103,35 +680,21 @@
 
   var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx5iBMqkddvCImr4IU953Nrp24b6xVlwu_k86s5SDUjXBge43WADDWrZwOqsHopb9Cq2g/exec';
 
-  var TOTAL_STEPS = 7; // 0..6
+  var TOTAL_STEPS = 7;
   var currentStep = 0;
 
   var TEXT_FIELDS = ['q1','q2','q3','q4','q5','q6','q7','q8'];
-
   var Q9 = ['q9_dominio_conteudos','q9_clareza_comunicacao','q9_capacidade_motivar','q9_disponibilidade_duvidas','q9_feedback_trabalhos','q9_pontualidade_gestao','q9_relacionamento_alunos','q9_apoio_relatorios','q9_preparacao_simulacao'];
   var Q10 = ['q10_clareza_objetivos','q10_qualidade_materiais','q10_relevancia_atividades','q10_adequacao_avaliacao','q10_articulacao_teoria_pratica','q10_contributo_formacao','q10_adequacao_calendario','q10_organizacao_simulacao','q10_tempo_decisoes'];
   var Q11 = ['q11_eficacia_plataforma','q11_qualidade_relatorios','q11_adequacao_posicao_competitiva','q11_adequacao_capacidade_tecnica','q11_equilibrio_avaliacao'];
 
-  // ── Build step dots ──
-  var dotsContainer = document.getElementById('stepsDots');
-  for (var i = 0; i < TOTAL_STEPS; i++) {
-    var dot = document.createElement('div');
-    dot.className = 'step-dot' + (i === 0 ? ' active' : '');
-    dot.dataset.step = i;
-    dotsContainer.appendChild(dot);
-  }
-
-  // ── UI helpers ──
   function $(id) { return document.getElementById(id); }
 
   function showStep(n) {
-    document.querySelectorAll('.step').forEach(function (el) {
-      el.classList.remove('active');
-    });
+    document.querySelectorAll('.step').forEach(function (el) { el.classList.remove('active'); });
     var target = document.querySelector('.step[data-step="' + n + '"]');
     if (target) target.classList.add('active');
 
-    // Buttons
     $('btnBack').style.display = n === 0 ? 'none' : '';
     if (n === TOTAL_STEPS - 1) {
       $('btnNext').textContent = 'Enviar respostas';
@@ -1141,27 +704,14 @@
       $('btnNext').className = 'btn btn-next';
     }
 
-    // Progress
-    var pct = Math.round(((n) / (TOTAL_STEPS - 1)) * 100);
+    var pct = Math.round((n / (TOTAL_STEPS - 1)) * 100);
     $('progressFill').style.width = pct + '%';
     $('progressCount').textContent = (n + 1) + ' / ' + TOTAL_STEPS;
 
-    // Dots
-    document.querySelectorAll('.step-dot').forEach(function (dot) {
-      var s = parseInt(dot.dataset.step);
-      dot.className = 'step-dot';
-      if (s < n) dot.classList.add('done');
-      if (s === n) dot.classList.add('active');
-    });
-
-    // Clear banner
     $('errorBanner').classList.remove('visible');
-
-    // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // ── Validation ──
   function validateEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
 
   function clearErrors() {
@@ -1173,104 +723,68 @@
 
   function showError(id) { var e = $(id); if (e) e.classList.add('visible'); }
 
+  function validateRadioGroup(fields, errorId) {
+    var miss = false;
+    fields.forEach(function (name) {
+      if (!document.querySelector('input[name="' + name + '"]:checked')) {
+        miss = true;
+        var row = document.querySelector('.matrix-row[data-name="' + name + '"]');
+        if (row) row.classList.add('has-error');
+      }
+    });
+    if (miss) showError(errorId);
+    return !miss;
+  }
+
+  function validateTextFields(ids) {
+    var ok = true, first = null;
+    ids.forEach(function (id) {
+      var el = $(id);
+      if (!el.value.trim()) {
+        el.classList.add('error');
+        showError(id + '-error');
+        ok = false;
+        if (!first) first = el;
+      }
+    });
+    return { ok: ok, first: first };
+  }
+
   function validateStep(n) {
     clearErrors();
-    var ok = true;
-    var first = null;
+    var result = { ok: true, first: null };
 
     if (n === 0) {
       var em = $('email');
       if (!em.value.trim() || !validateEmail(em.value.trim())) {
         em.classList.add('error');
         showError('email-error');
-        ok = false;
-        first = em;
+        result = { ok: false, first: em };
       }
+    } else if (n === 1) {
+      result = validateTextFields(['q1','q2','q3']);
+    } else if (n === 2) {
+      result = validateTextFields(['q4','q5','q6']);
+    } else if (n === 3) {
+      result = validateTextFields(['q7','q8']);
+    } else if (n === 4) {
+      result.ok = validateRadioGroup(Q9, 'q9-error');
+    } else if (n === 5) {
+      result.ok = validateRadioGroup(Q10, 'q10-error');
+    } else if (n === 6) {
+      result.ok = validateRadioGroup(Q11, 'q11-error');
     }
 
-    if (n === 1) {
-      ['q1','q2','q3'].forEach(function (id) {
-        var el = $(id);
-        if (!el.value.trim()) {
-          el.classList.add('error');
-          showError(id + '-error');
-          ok = false;
-          if (!first) first = el;
-        }
-      });
-    }
-
-    if (n === 2) {
-      ['q4','q5','q6'].forEach(function (id) {
-        var el = $(id);
-        if (!el.value.trim()) {
-          el.classList.add('error');
-          showError(id + '-error');
-          ok = false;
-          if (!first) first = el;
-        }
-      });
-    }
-
-    if (n === 3) {
-      ['q7','q8'].forEach(function (id) {
-        var el = $(id);
-        if (!el.value.trim()) {
-          el.classList.add('error');
-          showError(id + '-error');
-          ok = false;
-          if (!first) first = el;
-        }
-      });
-    }
-
-    if (n === 4) {
-      var miss = false;
-      Q9.forEach(function (name) {
-        if (!document.querySelector('input[name="' + name + '"]:checked')) {
-          miss = true;
-          var row = document.querySelector('.matrix-row[data-name="' + name + '"]');
-          if (row) row.classList.add('has-error');
-        }
-      });
-      if (miss) { showError('q9-error'); ok = false; }
-    }
-
-    if (n === 5) {
-      var miss2 = false;
-      Q10.forEach(function (name) {
-        if (!document.querySelector('input[name="' + name + '"]:checked')) {
-          miss2 = true;
-          var row = document.querySelector('.matrix-row[data-name="' + name + '"]');
-          if (row) row.classList.add('has-error');
-        }
-      });
-      if (miss2) { showError('q10-error'); ok = false; }
-    }
-
-    if (n === 6) {
-      var miss3 = false;
-      Q11.forEach(function (name) {
-        if (!document.querySelector('input[name="' + name + '"]:checked')) {
-          miss3 = true;
-          var row = document.querySelector('.matrix-row[data-name="' + name + '"]');
-          if (row) row.classList.add('has-error');
-        }
-      });
-      if (miss3) { showError('q11-error'); ok = false; }
-    }
-
-    if (!ok) {
+    if (!result.ok) {
       var banner = $('errorBanner');
       banner.textContent = 'Por favor, preencha todos os campos obrigatórios antes de avançar.';
       banner.classList.add('visible');
-      if (first) first.focus();
+      if (result.first) result.first.focus();
     }
 
-    return ok;
+    return result.ok;
   }
 
-  // ── Collect data ──
   function collectData() {
     var data = { timestamp: new Date().toISOString(), email: $('email').value.trim() };
     TEXT_FIELDS.forEach(function (id) { data[id] = $(id).value.trim(); });
@@ -1281,18 +795,15 @@
     return data;
   }
 
-  // ── Submit ──
   function submitForm() {
     var btn = $('btnNext');
     btn.disabled = true;
     btn.innerHTML = '<span class="spinner"></span>A enviar\u2026';
 
-    var data = collectData();
-
     fetch(SCRIPT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(data),
+      body: JSON.stringify(collectData()),
       redirect: 'follow'
     })
     .then(function (r) {
@@ -1300,13 +811,13 @@
       return r.text().catch(function () { return ''; });
     })
     .then(function () {
-      $('progressFill').style.width = '100%';
       $('progressWrap').style.display = 'none';
-      document.querySelector('.card').style.display = 'none';
+      $('navBar').style.display = 'none';
+      document.querySelectorAll('.step').forEach(function (s) { s.classList.remove('active'); });
       $('successScreen').classList.add('visible');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     })
-    .catch(function (err) {
+    .catch(function () {
       btn.disabled = false;
       btn.textContent = 'Enviar respostas';
       btn.className = 'btn btn-submit';
@@ -1316,25 +827,16 @@
     });
   }
 
-  // ── Navigation ──
   $('btnNext').addEventListener('click', function () {
     if (!validateStep(currentStep)) return;
-    if (currentStep === TOTAL_STEPS - 1) {
-      submitForm();
-    } else {
-      currentStep++;
-      showStep(currentStep);
-    }
+    if (currentStep === TOTAL_STEPS - 1) { submitForm(); }
+    else { currentStep++; showStep(currentStep); }
   });
 
   $('btnBack').addEventListener('click', function () {
-    if (currentStep > 0) {
-      currentStep--;
-      showStep(currentStep);
-    }
+    if (currentStep > 0) { currentStep--; showStep(currentStep); }
   });
 
-  // ── Clear errors on interaction ──
   document.querySelectorAll('textarea, input[type="email"]').forEach(function (el) {
     el.addEventListener('input', function () {
       el.classList.remove('error');
@@ -1350,7 +852,6 @@
     });
   });
 
-  // ── Keyboard: Enter advances ──
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
       e.preventDefault();
@@ -1358,7 +859,6 @@
     }
   });
 
-  // Init
   showStep(0);
 })();
 </script>
