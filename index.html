@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questionário — Simulação Empresarial 2025/2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f3f4f6;
+      color: #1f2937;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 24px 16px 64px;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+      padding: 32px;
+      margin-bottom: 20px;
+    }
+
+    .card-header {
+      border-top: 4px solid #2563eb;
+      border-radius: 12px 12px 0 0;
+      margin: -32px -32px 24px -32px;
+      padding: 32px 32px 0 32px;
+    }
+
+    /* ── Typography ── */
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: #111827;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #4b5563;
+      margin-bottom: 20px;
+    }
+
+    .intro-text {
+      font-size: 0.9rem;
+      color: #4b5563;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .required-note {
+      font-size: 0.8rem;
+      color: #dc2626;
+      margin-top: 8px;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 4px;
+    }
+
+    .section-desc {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-bottom: 0;
+    }
+
+    /* ── Form Elements ── */
+    .question {
+      margin-bottom: 28px;
+    }
+
+    .question:last-child {
+      margin-bottom: 0;
+    }
+
+    .question-label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #1f2937;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .question-number {
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .required-star {
+      color: #dc2626;
+      margin-left: 2px;
+    }
+
+    .email-note {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    input[type="email"],
+    textarea {
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: #1f2937;
+      background: #fff;
+      border: 1.5px solid #d1d5db;
+      border-radius: 8px;
+      padding: 12px 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+
+    input[type="email"]:focus,
+    textarea:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+    }
+
+    input[type="email"].error,
+    textarea.error {
+      border-color: #dc2626;
+      box-shadow: 0 0 0 3px rgba(220,38,38,.1);
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .error-msg {
+      font-size: 0.78rem;
+      color: #dc2626;
+      margin-top: 6px;
+      display: none;
+    }
+
+    .error-msg.visible {
+      display: block;
+    }
+
+    /* ── Scale Legend ── */
+    .scale-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 20px;
+      font-size: 0.82rem;
+      color: #6b7280;
+      margin-bottom: 24px;
+      padding: 14px 16px;
+      background: #f9fafb;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .scale-legend span {
+      white-space: nowrap;
+    }
+
+    .scale-legend strong {
+      color: #374151;
+      font-weight: 600;
+    }
+
+    /* ── Radio Matrix ── */
+    .matrix-question {
+      margin-bottom: 32px;
+    }
+
+    .matrix-question:last-child {
+      margin-bottom: 0;
+    }
+
+    .matrix-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    /* Desktop matrix */
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .matrix-table thead th {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #6b7280;
+      text-align: center;
+      padding: 8px 4px 12px;
+      width: 52px;
+    }
+
+    .matrix-table thead th:first-child {
+      text-align: left;
+      width: auto;
+    }
+
+    .matrix-table tbody tr {
+      border-top: 1px solid #f3f4f6;
+    }
+
+    .matrix-table tbody tr:hover {
+      background: #f9fafb;
+    }
+
+    .matrix-table tbody td {
+      padding: 14px 4px;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .matrix-table tbody td:first-child {
+      text-align: left;
+      font-size: 0.85rem;
+      color: #374151;
+      padding-right: 12px;
+      line-height: 1.4;
+    }
+
+    .matrix-table tbody tr.error-row td:first-child {
+      color: #dc2626;
+    }
+
+    /* Custom radio */
+    .radio-wrap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .radio-wrap input[type="radio"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #d1d5db;
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      position: relative;
+    }
+
+    .radio-wrap input[type="radio"]:hover {
+      border-color: #2563eb;
+    }
+
+    .radio-wrap input[type="radio"]:checked {
+      border-color: #2563eb;
+    }
+
+    .radio-wrap input[type="radio"]:checked::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #2563eb;
+    }
+
+    .radio-wrap input[type="radio"]:focus-visible {
+      box-shadow: 0 0 0 3px rgba(37,99,235,.2);
+    }
+
+    /* ── Submit ── */
+    .submit-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn-submit {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #fff;
+      background: #2563eb;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 36px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-submit:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-submit:active {
+      transform: scale(0.98);
+    }
+
+    .btn-submit:disabled {
+      background: #93c5fd;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .submit-status {
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+
+    /* ── Spinner ── */
+    .spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid #93c5fd;
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Success Screen ── */
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 48px 24px;
+    }
+
+    .success-screen.visible {
+      display: block;
+    }
+
+    .success-icon {
+      width: 72px;
+      height: 72px;
+      background: #dcfce7;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .success-icon svg {
+      width: 36px;
+      height: 36px;
+      color: #16a34a;
+    }
+
+    .success-screen h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 8px;
+    }
+
+    .success-screen p {
+      font-size: 0.9rem;
+      color: #6b7280;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* ── Error Banner ── */
+    .error-banner {
+      display: none;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      font-size: 0.85rem;
+      color: #991b1b;
+      line-height: 1.5;
+    }
+
+    .error-banner.visible {
+      display: block;
+    }
+
+    /* ── Progress Bar ── */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: #2563eb;
+      transition: width 0.3s ease;
+      z-index: 100;
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 640px) {
+      body { padding: 12px 8px 48px; }
+
+      .card { padding: 20px 16px; border-radius: 10px; }
+
+      .card-header {
+        margin: -20px -16px 20px -16px;
+        padding: 20px 16px 0 16px;
+      }
+
+      h1 { font-size: 1.35rem; }
+
+      .matrix-table { display: block; }
+      .matrix-table thead { display: none; }
+      .matrix-table tbody { display: block; }
+
+      .matrix-table tbody tr {
+        display: block;
+        padding: 16px 0;
+        border-top: 1px solid #e5e7eb;
+      }
+
+      .matrix-table tbody tr:first-child {
+        border-top: none;
+        padding-top: 0;
+      }
+
+      .matrix-table tbody td {
+        display: block;
+        text-align: left;
+        padding: 0;
+      }
+
+      .matrix-table tbody td:first-child {
+        font-weight: 500;
+        margin-bottom: 10px;
+        padding-right: 0;
+      }
+
+      .matrix-table tbody td:not(:first-child) {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-right: 16px;
+        margin-bottom: 4px;
+      }
+
+      .matrix-table tbody td:not(:first-child)::before {
+        content: attr(data-label);
+        font-size: 0.78rem;
+        color: #6b7280;
+        min-width: 14px;
+      }
+
+      .btn-submit { width: 100%; }
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: #fff; padding: 0; }
+      .card { box-shadow: none; border: 1px solid #e5e7eb; }
+      .progress-bar { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="container" id="formContainer">
+
+  <!-- ═══════ HEADER ═══════ -->
+  <div class="card">
+    <div class="card-header">
+      <h1>Questionário de Avaliação do Docente e da Unidade Curricular</h1>
+      <p class="subtitle">Simulação Empresarial 2025/2026 &nbsp;|&nbsp; Licenciatura em Gestão</p>
+    </div>
+    <p class="intro-text">
+      O presente questionário, de caráter estritamente anónimo, visa recolher a sua apreciação sobre a unidade curricular de Simulação Empresarial e sobre o desempenho do docente responsável pela sua lecionação. A informação obtida através deste instrumento constitui um contributo para a análise da qualidade pedagógica e para a implementação de medidas de aperfeiçoamento do processo de ensino‑aprendizagem.
+    </p>
+    <p class="intro-text">
+      As suas respostas serão tratadas com absoluta confidencialidade e utilizadas exclusivamente para fins de melhoria contínua da prática docente e da estruturação dos conteúdos programáticos. Solicitamos, por conseguinte, que responda com honestidade e sentido crítico a todas as questões apresentadas.
+    </p>
+    <p class="intro-text" style="margin-bottom:0;">
+      Agradecemos antecipadamente a sua colaboração neste processo de avaliação.
+    </p>
+    <p class="required-note">* Indica uma pergunta obrigatória</p>
+  </div>
+
+  <!-- ═══════ EMAIL ═══════ -->
+  <div class="card">
+    <div class="question">
+      <label class="question-label" for="email">
+        Endereço de e‑mail <span class="required-star">*</span>
+      </label>
+      <p class="email-note">
+        Este questionário é anónimo e individual. O e‑mail é solicitado apenas para efeitos de validação de resposta e não será associado publicamente às suas respostas.
+      </p>
+      <input type="email" id="email" name="email" placeholder="o-seu@email.com" required autocomplete="email">
+      <p class="error-msg" id="email-error">Por favor, insira um endereço de e‑mail válido.</p>
+    </div>
+  </div>
+
+  <!-- ═══════ SECÇÃO 1 — AVALIAÇÃO DO DOCENTE ═══════ -->
+  <div class="card">
+    <h2 class="section-title">Avaliação do Docente</h2>
+    <p class="section-desc" style="margin-bottom:24px;">Responda de forma aberta e fundamentada a cada questão.</p>
+
+    <div class="question">
+      <label class="question-label" for="q1">
+        <span class="question-number">1.</span> Resuma numa única frase o docente enquanto professor desta unidade curricular. <span class="required-star">*</span>
+      </label>
+      <textarea id="q1" name="q1" required></textarea>
+      <p class="error-msg" id="q1-error">Esta resposta é obrigatória.</p>
+    </div>
+
+    <div class="question">
+      <label class="question-label" for="q2">
+        <span class="question-number">2.</span> Descreva a capacidade do docente para explicar os conteúdos da unidade curricular. <span class="required-star">*</span>
+      </label>
+      <textarea id="q2" name="q2" required></textarea>
+      <p class="error-msg" id="q2-error">Esta resposta é obrigatória.</p>
+    </div>
+
+    <div class="question">
+      <label class="question-label" for="q3">
+        <span class="question-number">3.</span> Como caracteriza o acompanhamento prestado pelo docente aos alunos ao longo do semestre? <span class="required-star">*</span>
+      </label>
+      <textarea id="q3" name="q3" required></textarea>
+      <p class="error-msg" id="q3-error">Esta resposta é obrigatória.</p>
+    </div>
+
+    <div class="question">
+      <label class="question-label" for="q4">
+        <span class="question-number">4.</span> Que contributo específico trouxe o docente para a sua compreensão dos instrumentos técnicos necessários à tomada de decisão na simulação empresarial? <span class="required-star">*</span>
+      </label>
+      <textarea id="q4" name="q4" required></textarea>
+      <p class="error-msg" id="q4-error">Esta resposta é obrigatória.</p>
+    </div>
+
+    <div class="question">
+      <label class="question-label" for="q5">
+        <span class="question-number">5.</span> Em que medida o docente contribuiu para o desenvolvimento da sua capacidade analítica e pensamento estratégico durante o processo de simulação? <span class="required-star">*</span>
+      </label>
+      <textarea id="q5" name="q5" required></textarea>
+      <p class="error-msg" id="q5-error">Esta resposta é obrigatória.</p>
+    </div>
+
+    <div class="question">
+      <label class="question-label" for="q6">
+        <span class="question-number">6.</span> O que sugere que o docente modifique para melhorar o ensino desta unidade curricular? <span class="required-star">*</span>
+      </label>
+      <textarea id="q6" name="q6" required></textarea>
+      <p class="error-msg" id="q6-error">Esta resposta é obrigatória.</p>
+    </div>
+  </div>
+
+  <!-- ═══════ SECÇÃO 2 — AVALIAÇÃO DA UC ═══════ -->
+  <div class="card">
+    <h2 class="section-title">Avaliação da Unidade Curricular</h2>
+    <p class="section-desc" style="margin-bottom:24px;">Responda de forma aberta e fundamentada a cada questão.</p>
+
+    <div class="question">
+      <label class="question-label" for="q7">
+        <span class="question-number">7.</span> Como avalia a relevância dos conteúdos abordados para a sua formação profissional? <span class="required-star">*</span>
+      </label>
+      <textarea id="q7" name="q7" required></textarea>
+      <p class="error-msg" id="q7-error">Esta resposta é obrigatória.</p>
+    </div>
+
+    <div class="question">
+      <label class="question-label" for="q8">
+        <span class="question-number">8.</span> Identifique os pontos fortes e aspetos a melhorar na estrutura, organização e materiais desta unidade curricular. <span class="required-star">*</span>
+      </label>
+      <textarea id="q8" name="q8" required></textarea>
+      <p class="error-msg" id="q8-error">Esta resposta é obrigatória.</p>
+    </div>
+  </div>
+
+  <!-- ═══════ SECÇÃO 3 — AVALIAÇÃO QUANTITATIVA ═══════ -->
+  <div class="card">
+    <h2 class="section-title">Avaliação Quantitativa</h2>
+    <p class="section-desc" style="margin-bottom:16px;">Por favor, classifique os seguintes aspetos através da escala:</p>
+
+    <div class="scale-legend">
+      <span><strong>1</strong> = Insuficiente</span>
+      <span><strong>2</strong> = Suficiente</span>
+      <span><strong>3</strong> = Bom</span>
+      <span><strong>4</strong> = Muito Bom</span>
+      <span><strong>5</strong> = Excelente</span>
+    </div>
+
+    <!-- Q9 — Desempenho do Docente -->
+    <div class="matrix-question">
+      <p class="matrix-title">
+        <span class="question-number">9.</span> Desempenho do Docente <span class="required-star">*</span>
+      </p>
+      <p class="error-msg" id="q9-error" style="margin-bottom:10px;">Por favor, classifique todos os itens.</p>
+      <table class="matrix-table" role="group" aria-label="Desempenho do Docente">
+        <thead>
+          <tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+        </thead>
+        <tbody>
+          <tr data-row="q9_dominio_conteudos">
+            <td>Domínio dos conteúdos</td>
+            <td data-label="1"><span class="radio-wrap"><input type="radio" name="q9_dominio_conteudos" value="1"></span></td>
+            <td data-label="2"><span class="radio-wrap"><input type="radio" name="q9_dominio_conteudos" value="2"></span></td>
+            <td data-label="3"><span class="radio-wrap"><input type="radio" name="q9_dominio_conteudos" value="3"></span></td>
+            <td data-label="4"><span class="radio-wrap"><input type="radio" name="q9_dominio_conteudos" value="4"></span></td>
+            <td data-label="5"><span class="radio-wrap"><input type="radio" name="q9_dominio_conteudos" value="5"></span></td>
+          </tr>
+          <tr data-row="q9_clareza_comunicacao">
+            <td>Clareza na comunicação</td>
+            <td data-label="1"><span class="radio-wrap"><input type="radio" name="q9_clareza_comunicacao" value="1"></span></td>
+            <td data-label="2"><span class="radio-wrap"><input type="radio" name="q9_clareza_comunicacao" value="2"></span></td>
+            <td data-label="3"><span class="radio-wrap"><input type="radio" name="q9_clareza_comunicacao" value="3"></span></td>
+            <td data-label="4"><span class="radio-wrap"><input type="radio" name="q9_clareza_comunicacao" value="4"></span></td>
+            <td data-label="5"><span class="radio-wrap"><input type="radio" name="q9_clareza_comunicacao" value="5"></span></td>
+          </tr>
+          <tr data-row="q9_capacidade_motivar">
+            <td>Capacidade de motivar os alunos</td>
+            <td data-label="1"><span class="radio-wrap"><input type="radio" name="q9_capacidade_motivar" value="1"></span></td>
+            <td data-label="2"><span class="radio-wrap"><input type="radio" name="q9_capacidade_motivar" value="2"></span></td>
+            <td data-label="3"><span class="radio-wrap"><input type="radio" name="q9_capacidade_motivar" value="3"></span></td>
+            <td data-label="4"><span class="radio-wrap"><input type="radio" name="q9_capacidade_motivar" value="4"></span></td>
+            <td data-label="5"><span class="radio-wrap"><input type="radio" name="q9_capacidade_motivar" value="5"></span></td>
+          </tr>
+          <tr data-row="q9_disponibilidade_duvidas">
+            <td>Disponibilidade para esclarecer dúvidas</td>
+            <td data-label="1"><span class="radio-wrap"><input type="radio" name="q9_disponibilidade_duvidas" value="1"></span></td>
+            <td data-label="2"><span class="radio-wrap"><input type="radio" name="q9_disponibilidade_duvidas" value="2"></span></td>
+            <td data-label="3"><span class="radio-wrap"><input type="radio" name="q9_disponibilidade_duvidas" value="3"></span></td>
+            <td data-label="4"><span class="radio-wrap"><input type="radio" name="q9_disponibilidade_duvidas" value="4"></span></td>
+            <td data-label="5"><span class="radio-wrap"><input type="radio" name="q9_disponibilidade_duvidas" value="5"></span></td>
+          </tr>
+          <tr data-row="q9_feedback_trabalhos">
+            <td>Feedback sobre trabalhos/avaliações</td>
+            <td data-label="1"><span class="radio-wrap"><input type="radio" name="q9_feedback_trabalhos" value="1"></span></td>
+            <td data-label="2"><span class="radio-wrap"><input type="radio" name="q9_feedback_trabalhos" value="2"></span></td>
+            <td data-label="3"><span class="radio-wrap"><input type="radio" name="q9_feedback_trabalhos" value="3"></span></td>
+            <td data-label="4"><span class="radio-wrap"><input type="radio" name="q9_feedback_trabalhos" value="4"></span></td>
+            <td data-label="5"><span class="radio-wrap"><input type="radio" name="q9_feedback_trabalhos" value="5"></span></td>
+          </tr>
+          <tr data-row="q9_pontualidade_gestao">
+            <td>Pontualidade e gestão do tempo de aula</td>
+            <td data-label="1"><span class="radio-wrap"><input type="radio" name="q9_pontualidade_gestao" value="1"></span></td>
+            <td data-label="2"><span class="radio-wrap"><input type="radio" name="q9_pontualidade_gestao" value="2"></span></td>
+            <td data-label="3"><span class="radio-wrap"><input type="radio" name="q9_pontualidade_gestao" value="3"></span></td>
+            <td data-label="4"><span class="radio-wrap"><input type="radio" name="q9_pontualidade_gestao" value="4"></span></td>
+            <td data-label="5"><span class="radio-wrap"><input type="radio" name="q9_pontualidade_gestao" value="5"></span></td>
+          </tr>
+          <tr data-row="q9_relacionamento_alunos">
+            <td>Relacionamento com os alunos</td>
+            <td data-label="1"><span class="radio-wrap"><input type="radio" name="q9_relacionamento_alunos" value="1"></span></td>
+            <td data-label="2"><span class="radio-wrap"><input type="radio" name="q9_relacionamento_alunos" value="2"></span></td>
+            <td data-label="3"><span class="radio-wrap"><input type="radio" name="q9_relacionamento_alunos" value="3"></span></td>
+            <td data-label="4"><span class="radio-wrap"><input type="radio" name="q9_relacionamento_alunos" value="4"></span></td>
+            <td data-label="5"><span class="radio-wrap"><input type="radio" name="q9_relacionamento_alunos" value="5"></span></td>
+          </tr>
+          <tr data-row="q9_apoio_relatorios">
+            <td>Apoio na elaboração dos relatórios, atas e instrumentos</td>
+            <td data-label="1"><span class="radio-wrap"><input type="radio" name="q9_apoio_relatorios" value="1"></span></td>
+            <td data-label="2"><span class="radio-wrap"><input type="radio" name="q9_apoio_relatorios" value="2"></span></td>
+            <td data-label="3"><span class="radio-wrap"><input type="radio" name="q9_apoio_relatorios" value="3"></span></td>
+            <td data-label="4"><span class="radio-wrap"><input type="radio" name="q9_apoio_relatorios" value="4"></span></td>
+            <td data-label="5"><span class="radio-wrap"><input type="radio" name="q9_apoio_relatorios" value="5"></span></td>
+          </tr>
+          <tr data-row="q9_preparacao_simulacao">
+            <td>Preparação para o contexto da simulação</td>
+            <td data-label="1"><span class="radio-wrap"><input type="radio" name="q9_preparacao_simulacao" value="1"></span></td>
+            <td data-label="2"><span class="radio-wrap"><input type="radio" name="q9_preparacao_simulacao" value="2"></span></td>
+            <td data-label="3"><span class="radio-wrap"><input type="radio" name="q9_preparacao_simulacao" value="3"></span></td>
+            <td data-label="4"><span class="radio-wrap"><input type="radio" name="q9_preparacao_simulacao" value="4"></span></td>
+            <td data-label="5"><span class="radio-wrap"><input type="radio" name="q9_preparacao_simulacao" value="5"></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Q10 — Unidade Curricular -->
+    <div class="matrix-question">
+      <p class="matrix-title">
+        <span class="question-number">10.</span> Unidade Curricular <span class="required-star">*</span>
+      </p>
+      <p class="error-msg" id="q10-error" style="margin-bottom:10px;">Por favor, classifique todos os itens.</p>
+      <table class="matrix-table" role="group" aria-label="Unidade Curricular">
+        <thead>
+          <tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+        </thead>
+        <tbody>
+          <tr data-row="q10_clareza_objetivos">
+            <td>Clareza dos objetivos</td>
+            <td data-label="1"><span class="radio-wrap"><input type="radio" name="q10_clareza_objetivos" value="1"></span></td>
+            <td data-label="2"><span class="radio-wrap"><input type="radio" name="q10_clareza_objetivos" value="2"></span></td>
+            <td data-label="3"><span class="radio-wrap"><input type="radio" name="q10_clareza_objetivos" value="3"></span></td>
+            <td data-label="4"><span class="radio-wrap"><input type="radio" name="q10_clareza_objetivos" value="4"></span></td>
+            <td data-label="5"><span class="radio-wrap"><input type="radio" name="q10_clareza_objetivos" value="5"></span></td>
+          </tr>
+          <tr data-row="q10_qualidade_materiais">
+            <td>Qualidade dos materiais de apoio</td>
+            <td data-label="1"><span class="radio-wrap"><input type="radio" name="q10_qualidade_materiais" value="1"></span></td>
+            <td data-label="2"><span class="radio-wrap"><input type="radio" name="q10_qualidade_materiais" value="2"></span></td>
+            <td data-label="3"><span class="radio-wrap"><input type="radio" name="q10_qualidade_materiais" value="3"></span></td>
+            <td data-label="4"><span class="radio-wrap"><input type="radio" name="q10_qualidade_materiais" value="4"></span></td>
+            <td data-label="5"><span class="radio-wrap"><input type="radio" name="q10_qualidade_materiais" value="5"></span></td>
+          </tr>
+          <tr data-row="q10_relevancia_atividades">
+            <td>Relevância das atividades práticas</td>
+            <td data-label="1"><span class="radio-wrap"><input type="radio" name="q10_relevancia_atividades" value="1"></span></td>
+            <td data-label="2"><span class="radio-wrap"><input type="radio" name="q10_relevancia_atividades" value="2"></span></td>
+            <td data-label="3"><span class="radio-wrap"><input type="radio" name="q10_relevancia_atividades" value="3"></span></td>
+            <td data-label="4"><span class="radio-wrap"><input type="radio" name="q10_relevancia_atividades" value="4"></span></td>
+            <td data-label="5"><span class="radio-wrap"><input type="radio" name="q10_relevancia_atividades" value="5"></span></td>
+          </tr>
+          <tr data-row="q10_adequacao_avaliacao">
+            <td>Adequação dos métodos de avaliação</td>
+            <td data-label="1"><span class="radio-wrap"><input type="radio" name="q10_adequacao_avaliacao" value="1"></span></td>
+            <td data-label="2"><span class="radio-wrap"><input type="radio" name="q10_adequacao_avaliacao" value="2"></span></td>
+            <td data-label="3"><span class="radio-wrap"><input type="radio" name="q10_adequacao_avaliacao" value="3"></span></td>
+            <td data-label="4"><span class="radio-wrap"><input type="radio" name="q10_adequacao_avaliacao" value="4"></span></td>
+            <td data-label="5"><span class="radio-wrap"><input type="radio" name="q10_adequacao_avaliacao" value="5"></span></td>
+          </tr>
+          <tr data-row="q10_articulacao_teoria_pratica">
+            <td>Articulação entre teoria e prática</td>
+            <td data-label="1"><span class="radio-wrap"><input type="radio" name="q10_articulacao_teoria_pratica" value="1"></span></td>
+            <td data-label="2"><span class="radio-wrap"><input type="radio" name="q10_articulacao_teoria_pratica" value="2"></span></td>
+            <td data-label="3"><span class="radio-wrap"><input type="radio" name="q10_articulacao_teoria_pratica" value="3"></span></td>
+            <td data-label="4"><span class="radio-wrap"><input type="radio" name="q10_articulacao_teoria_pratica" value="4"></span></td>
+            <td data-label="5"><span class="radio-wrap"><input type="radio" name="q10_articulacao_teoria_pratica" value="5"></span></td>
+          </tr>
+          <tr data-row="q10_contributo_formacao">
+            <td>Contributo para a sua formação profissional</td>
+            <td data-label="1"><span class="radio-wrap"><input type="radio" name="q10_contributo_formacao" value="1"></span></td>
+            <td data-label="2"><span class="radio-wrap"><input type="radio" name="q10_contributo_formacao" value="2"></span></td>
+            <td data-label="3"><span class="radio-wrap"><input type="radio" name="q10_contributo_formacao" value="3"></span></td>
+            <td data-label="4"><span class="radio-wrap"><input type="radio" name="q10_contributo_formacao" value="4"></span></td>
+            <td data-label="5"><span class="radio-wrap"><input type="radio" name="q10_contributo_formacao" value="5"></span></td>
+          </tr>
+          <tr data-row="q10_adequacao_calendario">
+            <td>Adequação do calendário de atividades</td>
+            <td data-label="1"><span class="radio-wrap"><input type="radio" name="q10_adequacao_calendario" value="1"></span></td>
+            <td data-label="2"><span class="radio-wrap"><input type="radio" name="q10_adequacao_calendario" value="2"></span></td>
+            <td data-label="3"><span class="radio-wrap"><input type="radio" name="q10_adequacao_calendario" value="3"></span></td>
+            <td data-label="4"><span class="radio-wrap"><input type="radio" name="q10_adequacao_calendario" value="4"></span></td>
+            <td data-label="5"><span class="radio-wrap"><input type="radio" name="q10_adequacao_calendario" value="5"></span></td>
+          </tr>
+          <tr data-row="q10_organizacao_simulacao">
+            <td>Organização do processo de simulação</td>
+            <td data-label="1"><span class="radio-wrap"><input type="radio" name="q10_organizacao_simulacao" value="1"></span></td>
+            <td data-label="2"><span class="radio-wrap"><input type="radio" name="q10_organizacao_simulacao" value="2"></span></td>
+            <td data-label="3"><span class="radio-wrap"><input type="radio" name="q10_organizacao_simulacao" value="3"></span></td>
+            <td data-label="4"><span class="radio-wrap"><input type="radio" name="q10_organizacao_simulacao" value="4"></span></td>
+            <td data-label="5"><span class="radio-wrap"><input type="radio" name="q10_organizacao_simulacao" value="5"></span></td>
+          </tr>
+          <tr data-row="q10_tempo_decisoes">
+            <td>Tempo disponível para a tomada de decisões</td>
+            <td data-label="1"><span class="radio-wrap"><input type="radio" name="q10_tempo_decisoes" value="1"></span></td>
+            <td data-label="2"><span class="radio-wrap"><input type="radio" name="q10_tempo_decisoes" value="2"></span></td>
+            <td data-label="3"><span class="radio-wrap"><input type="radio" name="q10_tempo_decisoes" value="3"></span></td>
+            <td data-label="4"><span class="radio-wrap"><input type="radio" name="q10_tempo_decisoes" value="4"></span></td>
+            <td data-label="5"><span class="radio-wrap"><input type="radio" name="q10_tempo_decisoes" value="5"></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Q11 — Componentes Específicas da Simulação -->
+    <div class="matrix-question">
+      <p class="matrix-title">
+        <span class="question-number">11.</span> Componentes Específicas da Simulação <span class="required-star">*</span>
+      </p>
+      <p class="error-msg" id="q11-error" style="margin-bottom:10px;">Por favor, classifique todos os itens.</p>
+      <table class="matrix-table" role="group" aria-label="Componentes Específicas da Simulação">
+        <thead>
+          <tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+        </thead>
+        <tbody>
+          <tr data-row="q11_eficacia_plataforma">
+            <td>Eficácia da plataforma de submissão das decisões</td>
+            <td data-label="1"><span class="radio-wrap"><input type="radio" name="q11_eficacia_plataforma" value="1"></span></td>
+            <td data-label="2"><span class="radio-wrap"><input type="radio" name="q11_eficacia_plataforma" value="2"></span></td>
+            <td data-label="3"><span class="radio-wrap"><input type="radio" name="q11_eficacia_plataforma" value="3"></span></td>
+            <td data-label="4"><span class="radio-wrap"><input type="radio" name="q11_eficacia_plataforma" value="4"></span></td>
+            <td data-label="5"><span class="radio-wrap"><input type="radio" name="q11_eficacia_plataforma" value="5"></span></td>
+          </tr>
+          <tr data-row="q11_qualidade_relatorios">
+            <td>Qualidade dos relatórios de gestão disponibilizados</td>
+            <td data-label="1"><span class="radio-wrap"><input type="radio" name="q11_qualidade_relatorios" value="1"></span></td>
+            <td data-label="2"><span class="radio-wrap"><input type="radio" name="q11_qualidade_relatorios" value="2"></span></td>
+            <td data-label="3"><span class="radio-wrap"><input type="radio" name="q11_qualidade_relatorios" value="3"></span></td>
+            <td data-label="4"><span class="radio-wrap"><input type="radio" name="q11_qualidade_relatorios" value="4"></span></td>
+            <td data-label="5"><span class="radio-wrap"><input type="radio" name="q11_qualidade_relatorios" value="5"></span></td>
+          </tr>
+          <tr data-row="q11_adequacao_posicao_competitiva">
+            <td>Adequação dos critérios de avaliação da Posição Competitiva</td>
+            <td data-label="1"><span class="radio-wrap"><input type="radio" name="q11_adequacao_posicao_competitiva" value="1"></span></td>
+            <td data-label="2"><span class="radio-wrap"><input type="radio" name="q11_adequacao_posicao_competitiva" value="2"></span></td>
+            <td data-label="3"><span class="radio-wrap"><input type="radio" name="q11_adequacao_posicao_competitiva" value="3"></span></td>
+            <td data-label="4"><span class="radio-wrap"><input type="radio" name="q11_adequacao_posicao_competitiva" value="4"></span></td>
+            <td data-label="5"><span class="radio-wrap"><input type="radio" name="q11_adequacao_posicao_competitiva" value="5"></span></td>
+          </tr>
+          <tr data-row="q11_adequacao_capacidade_tecnica">
+            <td>Adequação dos critérios de avaliação da Capacidade Técnica</td>
+            <td data-label="1"><span class="radio-wrap"><input type="radio" name="q11_adequacao_capacidade_tecnica" value="1"></span></td>
+            <td data-label="2"><span class="radio-wrap"><input type="radio" name="q11_adequacao_capacidade_tecnica" value="2"></span></td>
+            <td data-label="3"><span class="radio-wrap"><input type="radio" name="q11_adequacao_capacidade_tecnica" value="3"></span></td>
+            <td data-label="4"><span class="radio-wrap"><input type="radio" name="q11_adequacao_capacidade_tecnica" value="4"></span></td>
+            <td data-label="5"><span class="radio-wrap"><input type="radio" name="q11_adequacao_capacidade_tecnica" value="5"></span></td>
+          </tr>
+          <tr data-row="q11_equilibrio_avaliacao">
+            <td>Equilíbrio global do sistema de avaliação</td>
+            <td data-label="1"><span class="radio-wrap"><input type="radio" name="q11_equilibrio_avaliacao" value="1"></span></td>
+            <td data-label="2"><span class="radio-wrap"><input type="radio" name="q11_equilibrio_avaliacao" value="2"></span></td>
+            <td data-label="3"><span class="radio-wrap"><input type="radio" name="q11_equilibrio_avaliacao" value="3"></span></td>
+            <td data-label="4"><span class="radio-wrap"><input type="radio" name="q11_equilibrio_avaliacao" value="4"></span></td>
+            <td data-label="5"><span class="radio-wrap"><input type="radio" name="q11_equilibrio_avaliacao" value="5"></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════ SUBMIT ═══════ -->
+  <div class="card">
+    <div class="error-banner" id="errorBanner"></div>
+    <div class="submit-section">
+      <button type="button" class="btn-submit" id="btnSubmit" onclick="handleSubmit()">Enviar respostas</button>
+      <span class="submit-status" id="submitStatus"></span>
+    </div>
+  </div>
+
+</div><!-- /formContainer -->
+
+<!-- ═══════ SUCCESS ═══════ -->
+<div class="container">
+  <div class="card success-screen" id="successScreen">
+    <div class="success-icon">
+      <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+    </div>
+    <h2>Resposta registada com sucesso</h2>
+    <p>Obrigado pela sua participação. As suas respostas foram guardadas e serão tratadas de forma confidencial.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  // ════════════════════════════════════════════
+  //  CONFIGURAÇÃO — Cole aqui o URL do Google Apps Script
+  //  (ver README.md para instruções de configuração)
+  // ════════════════════════════════════════════
+  var SCRIPT_URL = '';
+  // ════════════════════════════════════════════
+
+  // All radio group names used in matrices
+  var Q9_FIELDS = [
+    'q9_dominio_conteudos','q9_clareza_comunicacao','q9_capacidade_motivar',
+    'q9_disponibilidade_duvidas','q9_feedback_trabalhos','q9_pontualidade_gestao',
+    'q9_relacionamento_alunos','q9_apoio_relatorios','q9_preparacao_simulacao'
+  ];
+  var Q10_FIELDS = [
+    'q10_clareza_objetivos','q10_qualidade_materiais','q10_relevancia_atividades',
+    'q10_adequacao_avaliacao','q10_articulacao_teoria_pratica','q10_contributo_formacao',
+    'q10_adequacao_calendario','q10_organizacao_simulacao','q10_tempo_decisoes'
+  ];
+  var Q11_FIELDS = [
+    'q11_eficacia_plataforma','q11_qualidade_relatorios',
+    'q11_adequacao_posicao_competitiva','q11_adequacao_capacidade_tecnica',
+    'q11_equilibrio_avaliacao'
+  ];
+  var TEXT_FIELDS = ['q1','q2','q3','q4','q5','q6','q7','q8'];
+
+  // ── Progress bar ──
+  function updateProgress() {
+    var total = 0, filled = 0;
+
+    // Email
+    total++;
+    if (document.getElementById('email').value.trim()) filled++;
+
+    // Text fields
+    TEXT_FIELDS.forEach(function (id) {
+      total++;
+      if (document.getElementById(id).value.trim()) filled++;
+    });
+
+    // Radio groups
+    var allRadios = Q9_FIELDS.concat(Q10_FIELDS, Q11_FIELDS);
+    allRadios.forEach(function (name) {
+      total++;
+      if (document.querySelector('input[name="' + name + '"]:checked')) filled++;
+    });
+
+    var pct = Math.round((filled / total) * 100);
+    document.getElementById('progressBar').style.width = pct + '%';
+  }
+
+  // Attach progress listeners
+  document.querySelectorAll('input, textarea').forEach(function (el) {
+    el.addEventListener('input', updateProgress);
+    el.addEventListener('change', updateProgress);
+  });
+
+  // ── Validation ──
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function showError(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('visible');
+  }
+
+  function hideError(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('visible');
+  }
+
+  function clearAllErrors() {
+    document.querySelectorAll('.error-msg').forEach(function (el) {
+      el.classList.remove('visible');
+    });
+    document.querySelectorAll('.error').forEach(function (el) {
+      el.classList.remove('error');
+    });
+    document.querySelectorAll('.error-row').forEach(function (el) {
+      el.classList.remove('error-row');
+    });
+    document.getElementById('errorBanner').classList.remove('visible');
+  }
+
+  function validate() {
+    clearAllErrors();
+    var firstError = null;
+    var errorCount = 0;
+
+    // Email
+    var emailEl = document.getElementById('email');
+    var emailVal = emailEl.value.trim();
+    if (!emailVal || !validateEmail(emailVal)) {
+      emailEl.classList.add('error');
+      showError('email-error');
+      if (!firstError) firstError = emailEl;
+      errorCount++;
+    }
+
+    // Text fields
+    TEXT_FIELDS.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el.value.trim()) {
+        el.classList.add('error');
+        showError(id + '-error');
+        if (!firstError) firstError = el;
+        errorCount++;
+      }
+    });
+
+    // Radio matrices
+    [
+      { fields: Q9_FIELDS, errorId: 'q9-error' },
+      { fields: Q10_FIELDS, errorId: 'q10-error' },
+      { fields: Q11_FIELDS, errorId: 'q11-error' }
+    ].forEach(function (group) {
+      var missing = false;
+      group.fields.forEach(function (name) {
+        if (!document.querySelector('input[name="' + name + '"]:checked')) {
+          missing = true;
+          var row = document.querySelector('tr[data-row="' + name + '"]');
+          if (row) row.classList.add('error-row');
+        }
+      });
+      if (missing) {
+        showError(group.errorId);
+        if (!firstError) {
+          firstError = document.getElementById(group.errorId);
+        }
+        errorCount++;
+      }
+    });
+
+    if (errorCount > 0 && firstError) {
+      firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      var banner = document.getElementById('errorBanner');
+      banner.textContent = 'Por favor, preencha todos os campos obrigatórios antes de enviar.';
+      banner.classList.add('visible');
+    }
+
+    return errorCount === 0;
+  }
+
+  // ── Collect data ──
+  function collectData() {
+    var data = {
+      timestamp: new Date().toISOString(),
+      email: document.getElementById('email').value.trim()
+    };
+
+    TEXT_FIELDS.forEach(function (id) {
+      data[id] = document.getElementById(id).value.trim();
+    });
+
+    var allRadios = Q9_FIELDS.concat(Q10_FIELDS, Q11_FIELDS);
+    allRadios.forEach(function (name) {
+      var checked = document.querySelector('input[name="' + name + '"]:checked');
+      data[name] = checked ? parseInt(checked.value, 10) : null;
+    });
+
+    return data;
+  }
+
+  // ── Submit ──
+  window.handleSubmit = function () {
+    if (!validate()) return;
+
+    var btn = document.getElementById('btnSubmit');
+    var status = document.getElementById('submitStatus');
+
+    // Check backend URL
+    if (!SCRIPT_URL) {
+      var banner = document.getElementById('errorBanner');
+      banner.innerHTML = '<strong>Backend não configurado.</strong> O docente precisa de configurar o Google Apps Script. Consulte o ficheiro README.md do repositório.';
+      banner.classList.add('visible');
+      banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    btn.disabled = true;
+    status.innerHTML = '<span class="spinner"></span>A enviar…';
+
+    var data = collectData();
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(data),
+      redirect: 'follow'
+    })
+    .then(function (response) {
+      if (!response.ok && response.type !== 'opaque') {
+        throw new Error('Erro na resposta do servidor.');
+      }
+      return response.text().catch(function () { return ''; });
+    })
+    .then(function () {
+      // Success
+      document.getElementById('formContainer').style.display = 'none';
+      var screen = document.getElementById('successScreen');
+      screen.classList.add('visible');
+      screen.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('progressBar').style.width = '100%';
+    })
+    .catch(function (err) {
+      btn.disabled = false;
+      status.textContent = '';
+      var banner = document.getElementById('errorBanner');
+      banner.textContent = 'Ocorreu um erro ao enviar. Verifique a sua ligação e tente novamente. (' + err.message + ')';
+      banner.classList.add('visible');
+      banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  };
+
+  // ── Clear field errors on interaction ──
+  document.querySelectorAll('textarea, input[type="email"]').forEach(function (el) {
+    el.addEventListener('input', function () {
+      el.classList.remove('error');
+      var errEl = document.getElementById(el.id + '-error');
+      if (errEl) errEl.classList.remove('visible');
+    });
+  });
+
+  document.querySelectorAll('input[type="radio"]').forEach(function (el) {
+    el.addEventListener('change', function () {
+      var row = el.closest('tr');
+      if (row) row.classList.remove('error-row');
+    });
+  });
+
+  // Init progress
+  updateProgress();
+})();
+</script>
+
+</body>
+</html>
